@@ -223,3 +223,38 @@ ul.tags {
     }
   }
 }
+
+/* prototype */
+.team-select-expand {
+
+  .team-select-search-box {
+    width: 600px;
+  }
+
+
+  .team-select-search-results {
+    li {
+      padding: 0.3em 0.5em;
+      cursor: pointer;
+
+      &:hover {
+        background: #ededed;
+      }
+    }
+
+    li span {
+      display: block;
+    }
+
+    .team-name {
+
+    }
+
+    .team-path {
+      color: $grey-1;
+      font-size: 0.9em;
+    }
+  }
+
+}
+

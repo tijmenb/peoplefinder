@@ -1,6 +1,8 @@
 /* global $, _ */
 
 var TeamAutocomplete = (function (){
+  var data = undefined;
+
   var TeamAutocomplete = {
     transformations: [
       // replace Ministry of Justice with MoJ
@@ -50,6 +52,57 @@ var TeamAutocomplete = (function (){
       $(o).select2({
         templateResult: TeamAutocomplete.formatResults
       }).addClass('team-select-enhanced');
+    },
+
+    enhance2: function ( o ){
+      var $o = $(o);
+      data = _.without(_.map( $o.find('option'), function ( x ){
+        var m = x.innerHTML.match(/(.*) \[(.*)\]/);
+        if( m != null ){
+          var gs = m[2].split(' &gt; ');
+          var group = gs[1] || gs[0];
+
+          return { name: m[1], path: m[2], group: group, id: x.value };
+        }
+
+      }), undefined);
+
+      $results = $('.team-select-search-results');
+      TeamAutocomplete.render(data);
+
+      var $input = $('.team-select-search-box');
+
+      $input.keyup(function (){
+        var query = $input.val();
+        var list  = _.filter(data, function (x){
+          return x.name.toLowerCase().match(query);
+        });
+
+        TeamAutocomplete.render(list);
+      });
+
+      $o.hide();
+
+    },
+
+    render: function (list){
+      $results = $('.team-select-search-results');
+      $results.html('');
+
+      var l = _.groupBy(list, 'group');
+
+      _.each(l, function ( groupList, groupName ){
+        $results.append('<h3>' + groupName + '<h3>')
+
+        _.each(groupList, function (x){
+          var html = '<li data-group-id="' + x.id + '">'
+                   +   '<span class="team-name">' + x.name + '</span>'
+                   +   '<span class="team-path">' + x.group + '</span>'
+                   +   '<span class="team-path">' + x.path + '</span>'
+                   + '</li>';
+          $results.append($(html));
+        });
+      });
     }
   };
 
@@ -58,6 +111,6 @@ var TeamAutocomplete = (function (){
 
 $(function (){
   $('select.select-autocomplete').each(function (i, o){
-    TeamAutocomplete.enhance(o);
+    TeamAutocomplete.enhance2(o);
   });
 });

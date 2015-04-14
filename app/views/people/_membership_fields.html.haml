@@ -6,10 +6,119 @@
 
   .form-group
     = membership_f.label :group_id, 'Team', class: 'form-label-bold'
-    %p.form-hint= info_text('hint_add_person_to_team')
     = membership_f.collection_select :group_id,
       Group.all.sort_by { |g| g.path.map(&:to_s) },
       :id, :name_with_path, {}, class: 'form-control select-autocomplete team-select'
+
+    %div.team-select-expand
+      %p.form-hint Type your team name below to find it within the organisation
+      %p
+        %input.form-control.team-select-search-box
+
+      %ul.team-select-search-results
+        %li
+          %span.team-name Corporate Services
+          %span.team-path Ministry of Justice
+        %li
+          %span.team-name Digital Services
+          %span.team-path Ministry of Justice &gt; Corporate Services
+        %li
+          %span.team-name Business Operations
+          %span.team-path Ministry of Justice &gt; Corporate Services &gt; Digital Services
+        %li
+          %span.team-name Content
+          %span.team-path Ministry of Justice &gt; Corporate Services &gt; Digital Services
+        %li
+          %span.team-name Criminal Justice
+          %span.team-path Ministry of Justice &gt; Corporate Services &gt; Digital Services
+        %li
+          %span.team-name Delivery
+          %span.team-path Ministry of Justice &gt; Corporate Services &gt; Digital Services
+        %li
+          %span.team-name Design
+          %span.team-path Ministry of Justice &gt; Corporate Services &gt; Digital Services
+        %li
+          %span.team-name Development
+          %span.team-path Ministry of Justice &gt; Corporate Services &gt; Digital Services
+        %li
+          %span.team-name Digital Operations
+          %span.team-path Ministry of Justice &gt; Corporate Services &gt; Digital Services
+        %li
+          %span.team-name Management
+          %span.team-path Ministry of Justice &gt; Corporate Services &gt; Digital Services
+        %li
+          %span.team-name Performance
+          %span.team-path Ministry of Justice &gt; Corporate Services &gt; Digital Services
+        %li
+          %span.team-name Portfolio
+          %span.team-path Ministry of Justice &gt; Corporate Services &gt; Digital Services
+        %li
+          %span.team-name Prison Visits Booking
+          %span.team-path Ministry of Justice &gt; Corporate Services &gt; Digital Services
+        %li
+          %span.team-name Product
+          %span.team-path Ministry of Justice &gt; Corporate Services &gt; Digital Services
+        %li
+          %span.team-name Research
+          %span.team-path Ministry of Justice &gt; Corporate Services &gt; Digital Services
+        %li
+          %span.team-name Strategy
+          %span.team-path Ministry of Justice &gt; Corporate Services &gt; Digital Services
+        %li
+          %span.team-name Estates
+          %span.team-path Ministry of Justice &gt; Corporate Services
+        %li
+          %span.team-name HR
+          %span.team-path Ministry of Justice &gt; Corporate Services
+        %li
+          %span.team-name HR Commissioning &amp; Recruitment
+          %span.team-path Ministry of Justice &gt; Corporate Services &gt; HR
+        %li
+          %span.team-name Business Support and Other Things
+          %span.team-path Ministry of Justice &gt; Corporate Services &gt; HR &gt; HR Commissioning &amp; Recruitment
+        %li
+          %span.team-name Career Transition Service
+          %span.team-path Ministry of Justice &gt; Corporate Services &gt; HR &gt; HR Commissioning &amp; Recruitment &gt; Business Support and Other Things
+        %li
+          %span.team-name Shared Services
+          %span.team-path Ministry of Justice &gt; Corporate Services
+        %li
+          %span.team-name Technology
+          %span.team-path Ministry of Justice &gt; Corporate Services
+        %li
+          %span.team-name Criminal Cases Review Commission
+          %span.team-path Ministry of Justice
+        %li
+          %span.team-name Criminal Injuries Compensation Authority
+          %span.team-path Ministry of Justice
+        %li
+          %span.team-name HM Inspectorate of Prisons
+          %span.team-path Ministry of Justice
+        %li
+          %span.team-name HMCTS
+          %span.team-path Ministry of Justice
+        %li
+          %span.team-name Judicial Appointments Committee
+          %span.team-path Ministry of Justice
+        %li
+          %span.team-name Judicial Office For England And Wales
+          %span.team-path Ministry of Justice
+        %li
+          %span.team-name Law and Access to Justice
+          %span.team-path Ministry of Justice
+        %li
+          %span.team-name Legal Aid Agency
+          %span.team-path Ministry of Justice
+        %li
+          %span.team-name National Offender Management Service
+          %span.team-path Ministry of Justice
+        %li
+          %span.team-name Prison and Probation Ombudsmen
+          %span.team-path Ministry of Justice
+        %li
+          %span.team-name Private Office Directorate
+          %span.team-path Ministry of Justice
+
 
   .form-group
     = membership_f.label :leader, 'Team leader?', class: 'form-label-bold'
