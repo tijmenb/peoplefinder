@@ -48,6 +48,7 @@ group :development do
 end
 
 group :development, :test do
+  gem 'ruby-jmeter'
   gem 'brakeman'
   gem 'capybara'
   gem 'dotenv-rails'
