@@ -19,3 +19,4 @@
 # ignore osx .DS_Store
 *.DS_Store
 .idea
+jmeter.*
