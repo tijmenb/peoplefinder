@@ -1,9 +1,14 @@
 #!/usr/bin/env ruby
 
+# requires jmeter to be installed beforehand
+# Settings
+# TEST_DOMAIN
+# TEST_PORT
+# TEST_AUTH_TOKEN
+
 require 'bundler/setup'
 require 'ruby-jmeter'
 require 'faker'
-
 
 test do
   defaults domain: ENV['TEST_DOMAIN'], port: ENV['TEST_PORT']
@@ -46,9 +51,9 @@ test do
                                   'person[email]'        => "#{Faker::Internet.user_name}@digital.justice.gov.uk",
                                   'commit'              => 'Save',
                               }
-                           } #do
-      #   assert contains: "Created #{full_name}’s profile"
-      # end
+                           } do
+        assert contains: "Created #{full_name}’s profile"
+      end
 
     end
   end
