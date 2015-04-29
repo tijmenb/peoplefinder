@@ -5,6 +5,8 @@
 # TEST_DOMAIN
 # TEST_PORT
 # TEST_AUTH_TOKEN
+# Run using the command 'bundle exec ./performance_test'
+# Results are output to jmeter.jtl for graphing or you can set gui: true and visualise locally by adding some listeners
 
 require 'bundler/setup'
 require 'ruby-jmeter'
