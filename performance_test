@@ -1,4 +1,4 @@
-#!/usr/bin/env ruby
+ #!/usr/bin/env ruby
 
 # requires jmeter to be installed beforehand
 # Settings
@@ -36,7 +36,7 @@ test do
     transaction '02_auth_token_login' do
       puts ENV['TEST_AUTH_TOKEN']
       visit "/tokens/#{ENV['TEST_AUTH_TOKEN']}" do
-        assert contains: 'Welcome to People Finder', scope: 'main'
+        assert contains: 'Signed in as', scope: 'main'
       end
     end
 
@@ -57,21 +57,21 @@ test do
                                     'person[email]'       =>  email,
                                     'commit'              => 'Save' }
     end
-  end
 
-  transaction '04_search_for_user' do
-    visit "/tokens/#{ENV['TEST_AUTH_TOKEN']}"
-    visit 'search?utf8=%E2%9C%93&query=jonathan&commit=Submit+search' do
-      assert contains: 'Search results', scope: 'main'
-      assert contains: 'Technical Architect', scope: 'main'
+    transaction '04_search_for_user' do
+      visit "/tokens/#{ENV['TEST_AUTH_TOKEN']}"
+      visit '/search?utf8=%E2%9C%93&query=jonathan&commit=Submit+search' do
+        assert contains: 'Search results', scope: 'main'
+        assert contains: 'Technical Architect', scope: 'main'
+      end
+    end
+
+    transaction '05_view_persons_profile' do
+      visit "/tokens/#{ENV['TEST_AUTH_TOKEN']}"
+      visit '/people/jonathan-conway' do
+        assert contains: 'Jonathan Conway', scope: 'main'
+        assert contains: 'Technical Architect', scope: 'main'
+      end
     end
   end
-
-  transaction '05_view_persons_profile' do
-    visit "/tokens/#{ENV['TEST_AUTH_TOKEN']}"
-    visit '/people/jonathan-conway' do
-      assert contains: 'Jonathan Conway'
-      assert contains: 'Technical Architect'
-    end
-  end
-end.run(gui: false)
+end.run(gui: true)
