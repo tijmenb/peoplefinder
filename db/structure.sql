@@ -44,7 +44,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: communities; Type: TABLE; Schema: public; Owner: -; Tablespace:
+-- Name: communities; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE communities (
@@ -75,7 +75,7 @@ ALTER SEQUENCE communities_id_seq OWNED BY communities.id;
 
 
 --
--- Name: delayed_jobs; Type: TABLE; Schema: public; Owner: -; Tablespace:
+-- Name: delayed_jobs; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE delayed_jobs (
@@ -114,7 +114,7 @@ ALTER SEQUENCE delayed_jobs_id_seq OWNED BY delayed_jobs.id;
 
 
 --
--- Name: groups; Type: TABLE; Schema: public; Owner: -; Tablespace:
+-- Name: groups; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE groups (
@@ -150,7 +150,7 @@ ALTER SEQUENCE groups_id_seq OWNED BY groups.id;
 
 
 --
--- Name: memberships; Type: TABLE; Schema: public; Owner: -; Tablespace:
+-- Name: memberships; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE memberships (
@@ -185,7 +185,7 @@ ALTER SEQUENCE memberships_id_seq OWNED BY memberships.id;
 
 
 --
--- Name: people; Type: TABLE; Schema: public; Owner: -; Tablespace:
+-- Name: people; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE people (
@@ -240,7 +240,7 @@ ALTER SEQUENCE people_id_seq OWNED BY people.id;
 
 
 --
--- Name: permitted_domains; Type: TABLE; Schema: public; Owner: -; Tablespace:
+-- Name: permitted_domains; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE permitted_domains (
@@ -271,7 +271,7 @@ ALTER SEQUENCE permitted_domains_id_seq OWNED BY permitted_domains.id;
 
 
 --
--- Name: profile_photos; Type: TABLE; Schema: public; Owner: -; Tablespace:
+-- Name: profile_photos; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE profile_photos (
@@ -302,7 +302,7 @@ ALTER SEQUENCE profile_photos_id_seq OWNED BY profile_photos.id;
 
 
 --
--- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -; Tablespace:
+-- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE schema_migrations (
@@ -311,7 +311,7 @@ CREATE TABLE schema_migrations (
 
 
 --
--- Name: tokens; Type: TABLE; Schema: public; Owner: -; Tablespace:
+-- Name: tokens; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE tokens (
@@ -344,7 +344,7 @@ ALTER SEQUENCE tokens_id_seq OWNED BY tokens.id;
 
 
 --
--- Name: versions; Type: TABLE; Schema: public; Owner: -; Tablespace:
+-- Name: versions; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE versions (
@@ -444,7 +444,7 @@ ALTER TABLE ONLY versions ALTER COLUMN id SET DEFAULT nextval('versions_id_seq':
 
 
 --
--- Name: communities_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
+-- Name: communities_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY communities
@@ -452,7 +452,7 @@ ALTER TABLE ONLY communities
 
 
 --
--- Name: delayed_jobs_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
+-- Name: delayed_jobs_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY delayed_jobs
@@ -460,7 +460,7 @@ ALTER TABLE ONLY delayed_jobs
 
 
 --
--- Name: groups_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
+-- Name: groups_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY groups
@@ -468,7 +468,7 @@ ALTER TABLE ONLY groups
 
 
 --
--- Name: memberships_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
+-- Name: memberships_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY memberships
@@ -476,7 +476,7 @@ ALTER TABLE ONLY memberships
 
 
 --
--- Name: people_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
+-- Name: people_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY people
@@ -484,7 +484,7 @@ ALTER TABLE ONLY people
 
 
 --
--- Name: permitted_domains_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
+-- Name: permitted_domains_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY permitted_domains
@@ -492,7 +492,7 @@ ALTER TABLE ONLY permitted_domains
 
 
 --
--- Name: profile_photos_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
+-- Name: profile_photos_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY profile_photos
@@ -500,7 +500,7 @@ ALTER TABLE ONLY profile_photos
 
 
 --
--- Name: tokens_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
+-- Name: tokens_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY tokens
@@ -508,7 +508,7 @@ ALTER TABLE ONLY tokens
 
 
 --
--- Name: versions_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
+-- Name: versions_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY versions
@@ -516,63 +516,63 @@ ALTER TABLE ONLY versions
 
 
 --
--- Name: delayed_jobs_priority; Type: INDEX; Schema: public; Owner: -; Tablespace:
+-- Name: delayed_jobs_priority; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX delayed_jobs_priority ON delayed_jobs USING btree (priority, run_at);
 
 
 --
--- Name: index_groups_on_ancestry; Type: INDEX; Schema: public; Owner: -; Tablespace:
+-- Name: index_groups_on_ancestry; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_groups_on_ancestry ON groups USING btree (ancestry);
 
 
 --
--- Name: index_groups_on_slug; Type: INDEX; Schema: public; Owner: -; Tablespace:
+-- Name: index_groups_on_slug; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_groups_on_slug ON groups USING btree (slug);
 
 
 --
--- Name: index_memberships_on_group_id; Type: INDEX; Schema: public; Owner: -; Tablespace:
+-- Name: index_memberships_on_group_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_memberships_on_group_id ON memberships USING btree (group_id);
 
 
 --
--- Name: index_memberships_on_person_id; Type: INDEX; Schema: public; Owner: -; Tablespace:
+-- Name: index_memberships_on_person_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_memberships_on_person_id ON memberships USING btree (person_id);
 
 
 --
--- Name: index_people_on_lowercase_email; Type: INDEX; Schema: public; Owner: -; Tablespace:
+-- Name: index_people_on_lowercase_email; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE UNIQUE INDEX index_people_on_lowercase_email ON people USING btree (lower(email));
 
 
 --
--- Name: index_people_on_slug; Type: INDEX; Schema: public; Owner: -; Tablespace:
+-- Name: index_people_on_slug; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE UNIQUE INDEX index_people_on_slug ON people USING btree (slug);
 
 
 --
--- Name: index_versions_on_item_type_and_item_id; Type: INDEX; Schema: public; Owner: -; Tablespace:
+-- Name: index_versions_on_item_type_and_item_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_versions_on_item_type_and_item_id ON versions USING btree (item_type, item_id);
 
 
 --
--- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: -; Tablespace:
+-- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (version);
@@ -655,3 +655,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150420132854');
 INSERT INTO schema_migrations (version) VALUES ('20150604110007');
 
 INSERT INTO schema_migrations (version) VALUES ('20150604110654');
+
+INSERT INTO schema_migrations (version) VALUES ('20151110164612');
+
