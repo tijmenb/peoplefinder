@@ -2,11 +2,13 @@ FactoryGirl.define do
   sequence(:email) { |n| 'example.user.%d@digital.justice.gov.uk' % n }
   sequence(:given_name) { |n| 'First name-%04d' % n }
   sequence(:surname) { |n| 'Surname-%04d' % n }
+  sequence(:building) { |n| '%d High Street' % n }
+  sequence(:city) { |n| 'Megacity %d' % n }
   sequence(:phone_number) { |n| '07700 %06d' % (900_000 + n) }
 
   factory :department, class: 'Group' do
     initialize_with do
-      Group.where(ancestry_depth: 0).first_or_create(name: 'Cabinet Office')
+      Group.where(ancestry_depth: 0).first_or_create(name: 'Ministry of Justice')
     end
   end
 
@@ -21,8 +23,6 @@ FactoryGirl.define do
     given_name
     surname
     email
-    city
-    building
 
     factory :person_with_multiple_logins do
       login_count 10
@@ -58,13 +58,4 @@ FactoryGirl.define do
       File.join(Rails.root, 'spec', 'fixtures', 'placeholder.png')
     )
   end
-
-  factory :building do
-    address { Faker::Address.street_address }
-  end
-
-  factory :city do
-    name { Faker::Address.city }
-  end
-
 end

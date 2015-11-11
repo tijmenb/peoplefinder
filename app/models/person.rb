@@ -3,8 +3,6 @@ class Person < ActiveRecord::Base
   include Concerns::WorkDays
   include Concerns::ExposeMandatoryFields
   belongs_to :profile_photo
-  belongs_to :city
-  belongs_to :building
 
   extend FriendlyId
   friendly_id :slug_source, use: :slugged
@@ -107,14 +105,8 @@ class Person < ActiveRecord::Base
   delegate :name, to: :community, prefix: true, allow_nil: true
 
   include Concerns::ConcatenatedFields
+  concatenated_field :location, :location_in_building, :building, :city, join_with: ', '
   concatenated_field :name, :given_name, :surname, join_with: ' '
-
-  # concatenated_field :location, :location_in_building, :building, :city, join_with: ', '
-  def location
-    [self.location_in_building, self.building.try(:address), self.city.try(:name)]. \
-      select(&:present?). \
-      join(', ')
-  end
 
   def notify_of_change?(person_responsible)
     EmailAddress.new(email).valid_address? && person_responsible.try(:email) != email
