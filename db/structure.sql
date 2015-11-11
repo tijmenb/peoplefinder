@@ -44,6 +44,64 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
+-- Name: buildings; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE buildings (
+    id integer NOT NULL,
+    address character varying
+);
+
+
+--
+-- Name: buildings_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE buildings_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: buildings_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE buildings_id_seq OWNED BY buildings.id;
+
+
+--
+-- Name: cities; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE cities (
+    id integer NOT NULL,
+    name character varying
+);
+
+
+--
+-- Name: cities_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE cities_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: cities_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE cities_id_seq OWNED BY cities.id;
+
+
+--
 -- Name: communities; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -213,10 +271,10 @@ CREATE TABLE people (
     login_count integer DEFAULT 0 NOT NULL,
     last_login_at timestamp without time zone,
     super_admin boolean DEFAULT false,
-    building text,
-    city text,
     secondary_email text,
-    profile_photo_id integer
+    profile_photo_id integer,
+    building_id integer,
+    city_id integer
 );
 
 
@@ -384,6 +442,20 @@ ALTER SEQUENCE versions_id_seq OWNED BY versions.id;
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY buildings ALTER COLUMN id SET DEFAULT nextval('buildings_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY cities ALTER COLUMN id SET DEFAULT nextval('cities_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY communities ALTER COLUMN id SET DEFAULT nextval('communities_id_seq'::regclass);
 
 
@@ -441,6 +513,22 @@ ALTER TABLE ONLY tokens ALTER COLUMN id SET DEFAULT nextval('tokens_id_seq'::reg
 --
 
 ALTER TABLE ONLY versions ALTER COLUMN id SET DEFAULT nextval('versions_id_seq'::regclass);
+
+
+--
+-- Name: buildings_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY buildings
+    ADD CONSTRAINT buildings_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: cities_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY cities
+    ADD CONSTRAINT cities_pkey PRIMARY KEY (id);
 
 
 --
@@ -523,6 +611,20 @@ CREATE INDEX delayed_jobs_priority ON delayed_jobs USING btree (priority, run_at
 
 
 --
+-- Name: index_buildings_on_address; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_buildings_on_address ON buildings USING btree (address);
+
+
+--
+-- Name: index_cities_on_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_cities_on_name ON cities USING btree (name);
+
+
+--
 -- Name: index_groups_on_ancestry; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -548,6 +650,20 @@ CREATE INDEX index_memberships_on_group_id ON memberships USING btree (group_id)
 --
 
 CREATE INDEX index_memberships_on_person_id ON memberships USING btree (person_id);
+
+
+--
+-- Name: index_people_on_building_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_people_on_building_id ON people USING btree (building_id);
+
+
+--
+-- Name: index_people_on_city_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_people_on_city_id ON people USING btree (city_id);
 
 
 --
@@ -579,6 +695,14 @@ CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (v
 
 
 --
+-- Name: fk_rails_07454c8f08; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY people
+    ADD CONSTRAINT fk_rails_07454c8f08 FOREIGN KEY (building_id) REFERENCES buildings(id);
+
+
+--
 -- Name: fk_rails_092b9b8356; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -592,6 +716,14 @@ ALTER TABLE ONLY memberships
 
 ALTER TABLE ONLY memberships
     ADD CONSTRAINT fk_rails_aaf389f138 FOREIGN KEY (group_id) REFERENCES groups(id);
+
+
+--
+-- Name: fk_rails_f1ee174d54; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY people
+    ADD CONSTRAINT fk_rails_f1ee174d54 FOREIGN KEY (city_id) REFERENCES cities(id);
 
 
 --
@@ -657,4 +789,8 @@ INSERT INTO schema_migrations (version) VALUES ('20150604110007');
 INSERT INTO schema_migrations (version) VALUES ('20150604110654');
 
 INSERT INTO schema_migrations (version) VALUES ('20151110164612');
+
+INSERT INTO schema_migrations (version) VALUES ('20151111094306');
+
+INSERT INTO schema_migrations (version) VALUES ('20151111094711');
 
