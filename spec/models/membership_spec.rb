@@ -7,10 +7,10 @@ RSpec.describe Membership, type: :model do
   subject { described_class.new }
 
   it 'is not a leader by default' do
-    is_expected.not_to be_leader
+    expect(subject).not_to be_leader
   end
 
   it 'is suscribed by default' do
-    is_expected.to be_subscribed
+    expect(subject).to be_subscribed
   end
 end

@@ -18,5 +18,3 @@
 $:.unshift(Rails.root.join('db', 'seeds'))
 
 require 'permitted_domains'
-require 'buildings'
-require 'cities'

@@ -69,13 +69,13 @@
         = f.label :building, class: 'form-label-bold' do
           Building
           %p.form-hint= info_text('building_hint')
-          = f.select :building_id, buildings_options(@person), {}, class: 'form-control'
+        = f.text_field :building, class: 'form-control'
 
       = f.form_group :city do
         = f.label :city, class: 'form-label-bold' do
           City
           %p.form-hint= info_text('city_hint')
-        = f.select :city_id, cities_options(@person), {}, class: 'form-control'
+        = f.text_field :city, class: 'form-control'
 
   .form-group
     #memberships
