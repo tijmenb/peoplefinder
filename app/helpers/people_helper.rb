@@ -24,4 +24,14 @@ module PeopleHelper
       classes << 'completing' if activity == 'complete'
     }.join(' ')
   end
+
+  def cities_options(person)
+    cities = City.by_name.map{|city| [city.name, city.id]}
+    options_for_select [["- select city -",""]] + cities, person.city_id
+  end
+
+  def buildings_options(person)
+    buildings = Building.by_name.map{|building| [building.address, building.id]}
+    options_for_select [["- select building -",""]] + buildings, person.building_id
+  end
 end

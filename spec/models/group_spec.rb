@@ -176,14 +176,14 @@ RSpec.describe Group, type: :model do
       let!(:first_duplicate) { create(:group, name: 'Digital Services') }
 
       it 'prepends the parent' do
-        expect(first_duplicate.slug).to eql('ministry-of-justice-digital-services')
+        expect(first_duplicate.slug).to eql('cabinet-office-digital-services')
       end
 
       context 'when a second duplicate (name and parent name) is added' do
         let(:second_duplicate) { create(:group, name: 'Digital Services') }
 
         it 'appends -1 to the group name' do
-          expect(second_duplicate.slug).to eql('ministry-of-justice-digital-services-2')
+          expect(second_duplicate.slug).to eql('cabinet-office-digital-services-2')
         end
       end
     end
