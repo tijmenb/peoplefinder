@@ -72,4 +72,6 @@ FactoryGirl.define do
     allowed_to {[ 'cabinetoffice.gov.uk' ]}
   end
 
+  factory :readonly_user do
+  end
 end
