@@ -27,7 +27,7 @@ en:
     login_page:
       heading: Log in to People Finder
       intro: |
-        If you don't have a government Google account we can email you a secure link so you can log in to People Finder and create or edit profiles. The link will be active for 4 hours.
+        If you don't have a government Google account, we can email you a secure link so you can log in to People Finder. The link will be active for 4 hours.
       heading_google: Got a government Google account?
       body_google:
         If you have a Google account ending in gov.uk, you can log in now.
