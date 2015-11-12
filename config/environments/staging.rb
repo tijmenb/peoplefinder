@@ -23,6 +23,7 @@ Rails.application.configure do
     enable_starttls_auto: true
   }
   config.action_mailer.show_previews = true
+  config.action_mailer.preview_path ||= defined?(Rails.root) ? "#{Rails.root}/spec/mailers/previews" : nil
   config.filter_parameters += [
     :given_name, :surname, :email, :primary_phone_number,
     :secondary_phone_number, :location, :email
