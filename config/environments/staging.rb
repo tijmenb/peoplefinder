@@ -22,6 +22,7 @@ Rails.application.configure do
     domain: ENV['SENDGRID_DOMAIN'] || 'people-finder.dsd.io',
     enable_starttls_auto: true
   }
+  config.action_mailer.show_previews = true
   config.filter_parameters += [
     :given_name, :surname, :email, :primary_phone_number,
     :secondary_phone_number, :location, :email
