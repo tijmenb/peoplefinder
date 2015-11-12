@@ -49,7 +49,7 @@ defined on a per environment basis.
 
 `config.ga_tracking_id` Google Analytics tracking id [optional]. e.g. 'XXXX-XXX'
 
-`config.support_email` e.g. 'peoplefinder-support@example.com' or 'People Finder <peoplefinder-support@example.com>'
+`config.support_email` e.g. 'peoplefinder-support@example.com' or 'People Finder &lt;peoplefinder-support@example.com&gt;'
 
 ## Permitted domains
 
