@@ -34,3 +34,12 @@ Rails.application.configure do
     )
   end
 end
+
+# Without the following would display "For security purposes, this information is only available to local requests"
+class ::Rails::MailersController
+  include Rails.application.routes.url_helpers
+
+  def local_request?
+    true
+  end
+end
