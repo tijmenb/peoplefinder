@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  sequence(:email) { |n| 'example.user.%d@digital.justice.gov.uk' % n }
+  sequence(:email) { |n| 'example.user.%d@cabinetoffice.gov.uk' % n }
   sequence(:given_name) { |n| 'First name-%04d' % n }
   sequence(:surname) { |n| 'Surname-%04d' % n }
   sequence(:phone_number) { |n| '07700 %06d' % (900_000 + n) }
