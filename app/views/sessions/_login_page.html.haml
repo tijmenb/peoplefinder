@@ -14,10 +14,10 @@
 .spacer-5
 .spacer-5
 - if feature_enabled?('token_auth')
-  %h2.h3.no-line= t('.heading_other')
 
   -t('.intro').each_line do |line|
     %p= line
+  %h2.h3.no-line= t('.heading_other')
 
   = form_for (@token ||= Token.new) do |f|
 
