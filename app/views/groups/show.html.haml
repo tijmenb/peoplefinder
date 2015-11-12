@@ -4,19 +4,20 @@
 
 = render partial: 'detail'
 
-- unless @group.leaf_node?
+- if @group.leaf_node?
+  - if @group.non_leaderships.any?
+    .title_with_edit
+      %h2 People in #{ @group.short_name }
+    .grid-wrapper
+      = render partial: "memberships/summary", collection: @group.non_leaderships
+
+- else
   %h2
     Teams within
     = @group.name
     .view-all-people= link_to "View all people in #{ @group.name }", people_group_path(@group)
   .grid-wrapper
     = render partial: "subgroup", collection: @group.children
-
-- if @group.leaf_node?
-  .title_with_edit
-    %h2 People in #{ @group.short_name }
-  .grid-wrapper
-    = render partial: "memberships/summary", collection: @group.non_leaderships
 
 - unless @versions.nil?
   %h1 Audit Log
