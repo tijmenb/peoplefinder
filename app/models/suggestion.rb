@@ -1,4 +1,5 @@
 require 'virtus'
+
 class Suggestion
   include Virtus.model
   extend ActiveModel::Naming

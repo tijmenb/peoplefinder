@@ -1,5 +1,4 @@
-class TokenMailer < ActionMailer::Base
-  layout 'email'
+class TokenMailer < ApplicationMailer
 
   def new_token_email(token)
     @token = token

@@ -1,5 +1,4 @@
-class GroupUpdateMailer < ActionMailer::Base
-  layout 'email'
+class GroupUpdateMailer < ApplicationMailer
 
   def inform_subscriber(recipient, group, person_responsible)
     @group = group
