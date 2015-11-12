@@ -1,6 +1,5 @@
-class ReminderMailer < ActionMailer::Base
+class ReminderMailer < ApplicationMailer
   include FeatureHelper
-  layout 'email'
 
   def inadequate_profile(person)
     @person = person

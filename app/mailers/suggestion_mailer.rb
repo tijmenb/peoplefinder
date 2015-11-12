@@ -1,5 +1,4 @@
-class SuggestionMailer < ActionMailer::Base
-  layout 'email'
+class SuggestionMailer < ApplicationMailer
 
   def person_email(person, suggester, suggestion_hash)
     @person = person

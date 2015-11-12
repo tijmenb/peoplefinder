@@ -1,6 +1,5 @@
-class UserUpdateMailer < ActionMailer::Base
+class UserUpdateMailer < ApplicationMailer
   include FeatureHelper
-  layout 'email'
 
   def new_profile_email(person, by_email = nil)
     @person = person
