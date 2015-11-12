@@ -79,8 +79,8 @@ private
   def location_attributes
     {
       location_in_building: Faker::Address.secondary_address,
-      building: Faker::Address.street_address,
-      city: Faker::Address.city
+      building: Building.take,
+      city:     City.take,
     }
   end
 end
