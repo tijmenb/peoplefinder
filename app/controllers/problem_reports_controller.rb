@@ -4,7 +4,7 @@ class ProblemReportsController < ApplicationController
   def create
     problem_report = ProblemReport.new(problem_report_params)
     ProblemReportMailer.problem_report(problem_report.to_hash).deliver_later
-    flash[:notice] = 'Thanks for getting in touch'
+    flash[:notice] = 'Thanks for your feedback'
     redirect_to :back
   end
 
