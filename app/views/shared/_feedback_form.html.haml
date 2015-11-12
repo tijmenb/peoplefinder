@@ -11,6 +11,11 @@
         What went wrong?
       = f.text_area :problem
 
-      = f.hidden_field :browser
+        - unless logged_in_regular?
+          = f.label :person_email do
+            Your email
+          = f.text_field :person_email, class: 'form-control'
+
+        = f.hidden_field :browser
 
       = f.submit class: 'button'
