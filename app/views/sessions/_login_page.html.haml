@@ -8,6 +8,15 @@
 
 .spacer-25
 
+%h2.h3.no-line= t('.heading_google')
+
+%p= t('.body_google')
+%p
+  = link_to t('.log_in_google'), "/auth/gplus", class: 'button login-button'
+
+%hr
+.spacer-5
+
 - if feature_enabled?('token_auth')
   %h2.h3.no-line= t('.heading_other')
 
@@ -21,13 +30,3 @@
 
     .spacer-20
     = f.submit t('.log_in_email'), class: 'button'
-
-  %hr
-  .spacer-5
-
-%h2.h3.no-line= t('.heading_google')
-
-%p= t('.body_google')
-
-%p
-  = link_to t('.log_in_google'), "/auth/gplus", class: 'button login-button'
