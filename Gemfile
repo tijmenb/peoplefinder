@@ -47,6 +47,7 @@ end
 
 group :staging do
   gem 'rails_12factor'
+  gem 'factory_girl_rails' # used on MailPreview
 end
 
 group :development do
