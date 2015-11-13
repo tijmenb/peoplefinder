@@ -15,8 +15,13 @@
 .spacer-5
 - if feature_enabled?('token_auth')
 
-  -t('.intro').each_line do |line|
-    %p= line
+  %div.description
+    - if @unauthorised_login
+      -t('.intro_unauthorised').each_line do |line|
+        %p= line
+    -else
+      -t('.intro').each_line do |line|
+        %p= line
   %h2.h3.no-line= t('.heading_other')
 
   = form_for (@token ||= Token.new) do |f|
@@ -26,6 +31,7 @@
       - if @token.errors.include?(:user_email)
         %span.error= @token.errors[:user_email].first
       = f.text_field :user_email, class: 'form-control'
+      = f.hidden_field(:unauthorised_login, value: @unauthorised_login)
 
     .spacer-20
     = f.submit t('.log_in_email'), class: 'button'
