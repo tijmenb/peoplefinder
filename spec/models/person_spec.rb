@@ -164,7 +164,7 @@ RSpec.describe Person, type: :model do
       building = Building.take
       person.building = building
       person.city = City.where(name: 'London').first
-      expect(person.location).to eq("99.99, #{building.to_human}, London")
+      expect(person.location).to eq("99.99, #{building.try(:to_human)}, London")
     end
 
     it 'skips blank fields' do
