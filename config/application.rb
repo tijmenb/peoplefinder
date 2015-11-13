@@ -37,7 +37,7 @@ module Peoplefinder
     config.support_email = ENV.fetch('SUPPORT_EMAIL')
 
     config.action_mailer.default_options = {
-      from:  config.support_email
+      from:  "#{config.app_title} <#{config.support_email}>"
     }
 
     config.active_job.queue_adapter = :delayed_job
