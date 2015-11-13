@@ -25,13 +25,13 @@ en:
       default: "%d %b %Y %H:%M"
   sessions:
     login_page:
-      heading: Request link to access People Finder
+      heading: Log in to People Finder
       intro: |
-        We will email you a secure link so you can log in to People Finder and create or edit profiles. The link will be active for 3 hours.
+        If you don't have a government Google account, we can email you a secure link so you can log in to People Finder. The link will be active for 4 hours.
       heading_google: Got a government Google account?
       body_google:
         If you have a Google account ending in gov.uk, you can log in now.
-      heading_other: Enter your MOJ email address
+      heading_other: Enter your government email address
       log_in_google: Log in
       log_in_email: Request link
   tokens:
@@ -40,7 +40,7 @@ en:
     create:
       title: Link sent — check your email
       body_intro: We’re just emailing you a link to access People Finder. This can take up to 5 minutes.
-      body_informative_html: Please check your inbox for this email from <a href="mailto:people-finder-support@digital.justice.gov.uk">people-finder-support@digital.justice.gov.uk</a>.
+      body_informative_html: Please check your inbox for this email from <a href="mailto:peoplefinder@cabinetoffice.gov.uk">peoplefinder@cabinetoffice.gov.uk</a>.
       body_dont_panic: If you can’t find it, check your junk folder and add our address to your safe list.
       token_auth_disabled: "Sorry, the alternate login method is not availabe. Please login using your Google account."
   controllers:
@@ -154,21 +154,21 @@ en:
       subject: "People Finder profile improvements"
   user_update_mailer:
     new_profile_email:
-      subject: "You’re on MOJ People Finder, check your profile today"
+      subject: "You’re on CO People Finder, check your profile today"
     updated_profile_email:
-      subject: "Your profile on MOJ People Finder has been edited"
+      subject: "Your profile on CO People Finder has been edited"
     deleted_profile_email:
-      subject: "Your profile on MOJ People Finder has been deleted"
+      subject: "Your profile on CO People Finder has been deleted"
     updated_address_from_email:
-      subject: "This email address has been removed from a profile on MOJ People Finder"
+      subject: "This email address has been removed from a profile on CO People Finder"
     updated_address_to_email:
-      subject: "This email address has been added to a profile on MOJ People Finder"
+      subject: "This email address has been added to a profile on CO People Finder"
   group_update_mailer:
     inform_subscriber:
       subject: "People Finder team updated"
   token_mailer:
     new_token_email:
-      subject: 'Access request to MOJ People Finder'
+      subject: 'Access request to CO People Finder'
   errors: &errors
     information_request:
       message_required: "You must enter a message to be sent to the person"
@@ -244,9 +244,9 @@ en:
         Row 1 of file must have columns named and ordered in the following way:
         <code>given_name</code> <code>surname</code> <code>email</code>
       information_request_label: "Enter your message"
-      location_in_building_hint: "(eg 10.30)"
-      building_hint: "(eg 102 Petty France)"
-      city_hint: "(eg London)"
+      location_in_building_hint: "(e.g. 10.30)"
+      building_hint: "(e.g. 70 Whitehall)"
+      city_hint: "(e.g. London)"
       notes_field_hint: "Include details about where you work on different days, any days out of the office and if you start early or late."
       photo_upload_hint: "Add or replace an image (no files over 3MB.)"
       photo_crop_hint: "Move and resize the box to crop your profile image."

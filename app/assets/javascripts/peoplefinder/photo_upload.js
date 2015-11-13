@@ -105,8 +105,14 @@ var PhotoUpload = (function (){
       ];
 
       els.$preview.Jcrop({
-        setSelect: [20, 20, imgw-20, imgw-20],
+        setSelect: [
+         40, 
+         40, 
+         els.$preview.naturalWidth() - 40, 
+         els.$preview.naturalHeight() - 40 
+        ],
         trueSize: trueSize,
+        keySupport: false,
         onSelect: function ( cropData ){
           els.$preview.data('new-crop-data', cropData);
         },

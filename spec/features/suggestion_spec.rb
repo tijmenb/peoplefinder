@@ -68,7 +68,7 @@ feature 'Make a suggestion about a profile', js: true do
   end
 
   scenario 'Ask an admin to remove the profile' do
-    check 'remove the profile as the person has left MOJ'
+    check "remove the profile as the person has left the #{brand}"
     fill_in 'Person left info', with: 'They have left to become a goatherd'
     click_button 'Submit'
 

@@ -3,21 +3,20 @@
 - content_for :body_classes, 'login-page'
 %h1.no-line= t('.heading')
 
--t('.intro').each_line do |line|
-  %p= line
-
-.spacer-25
-
 %h2.h3.no-line= t('.heading_google')
 
 %p= t('.body_google')
 %p
   = link_to t('.log_in_google'), "/auth/gplus", class: 'button login-button'
 
+.spacer-5
 %hr
 .spacer-5
-
+.spacer-5
 - if feature_enabled?('token_auth')
+
+  -t('.intro').each_line do |line|
+    %p= line
   %h2.h3.no-line= t('.heading_other')
 
   = form_for (@token ||= Token.new) do |f|
