@@ -47,7 +47,6 @@ end
 
 group :staging do
   gem 'rails_12factor'
-  gem 'factory_girl_rails' # used on MailPreview
 end
 
 group :development do
@@ -55,10 +54,13 @@ group :development do
   gem 'mailcatcher'
 end
 
+group :development, :development, :test do
+  gem 'factory_girl_rails' # used on MailPreview, hence needed on staging
+end
+
 group :development, :test do
   gem 'brakeman'
   gem 'capybara'
-  gem 'factory_girl_rails'
   gem 'jshint'
   gem 'launchy'
   gem 'minitest'
@@ -66,6 +68,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'pry-byebug'
   gem 'rspec-rails'
+  gem 'spring-commands-rspec'
   gem 'shoulda-matchers'
   gem 'simplecov'
   gem 'simplecov-rcov'
