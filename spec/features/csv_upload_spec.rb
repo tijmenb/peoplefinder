@@ -5,7 +5,7 @@ feature 'Upload CSV' do
   include PermittedDomainHelper
 
   before do
-    omni_auth_log_in_as 'test.user@digital.justice.gov.uk'
+    omni_auth_log_in_as 'test.user@cabinetoffice.gov.uk'
   end
 
   scenario 'uploading a good CSV file' do
@@ -24,8 +24,8 @@ feature 'Upload CSV' do
     expect(page).to have_text('Successfully uploaded 2 people')
 
     %w[
-      peter.bly@digital.justice.gov.uk
-      jon.o.carey@digital.justice.gov.uk
+      peter.bly@cabinetoffice.gov.uk
+      jon.o.carey@cabinetoffice.gov.uk
     ].each do |email|
       person = Person.find_by(email: email)
       expect(person.groups).to eq([group])

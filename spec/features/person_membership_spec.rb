@@ -4,7 +4,7 @@ feature "Person maintenance" do
   include PermittedDomainHelper
 
   before do
-    omni_auth_log_in_as 'test.user@digital.justice.gov.uk'
+    omni_auth_log_in_as 'test.user@cabinetoffice.gov.uk'
   end
 
   scenario 'Creating a person and making them the leader of a group', js: true do

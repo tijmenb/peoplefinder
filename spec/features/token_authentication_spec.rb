@@ -36,22 +36,22 @@ feature 'Token Authentication' do
 
   describe 'bad email from valid domain' do
     it_should_behave_like "it received a valid request from" do
-      let(:email) { 'no.user.by.that.name@digital.justice.gov.uk' }
-      let(:sent_to) { 'no.user.by.that.name@digital.justice.gov.uk' }
+      let(:email) { 'no.user.by.that.name@cabinetoffice.gov.uk' }
+      let(:sent_to) { 'no.user.by.that.name@cabinetoffice.gov.uk' }
     end
   end
 
   describe 'accurate email' do
     it_should_behave_like "it received a valid request from" do
-      let(:email) { 'james.darling@digital.justice.gov.uk' }
-      let(:sent_to) { 'james.darling@digital.justice.gov.uk' }
+      let(:email) { 'james.darling@cabinetoffice.gov.uk' }
+      let(:sent_to) { 'james.darling@cabinetoffice.gov.uk' }
     end
   end
 
   describe 'copy-pasting an email with extraneous spaces' do
     it_should_behave_like "it received a valid request from" do
-      let(:email) { ' correct@digital.justice.gov.uk' }
-      let(:sent_to) { 'correct@digital.justice.gov.uk' }
+      let(:email) { ' correct@cabinetoffice.gov.uk' }
+      let(:sent_to) { 'correct@cabinetoffice.gov.uk' }
     end
   end
 
@@ -88,7 +88,7 @@ feature 'Token Authentication' do
   scenario "requesting more than 8 tokens per hour isn't permitted" do
     1.upto(9) do |count|
       visit '/'
-      fill_in 'token_user_email', with: ' tony.stark@digital.justice.gov.uk '
+      fill_in 'token_user_email', with: ' tony.stark@cabinetoffice.gov.uk '
       click_button 'Request link'
       if count < 9
         expect(page).to have_text('We’re just emailing you a link to access People Finder')
@@ -101,7 +101,7 @@ feature 'Token Authentication' do
   end
 
   scenario 'logging in and displaying a link to my profile' do
-    person = create(:person, given_name: 'Bob', surname: 'Smith', email: 'test.user@digital.justice.gov.uk')
+    person = create(:person, given_name: 'Bob', surname: 'Smith', email: 'test.user@cabinetoffice.gov.uk')
     token = Token.for_person(person)
     visit token_path(token)
     expect(page).to have_text('Signed in as Bob Smith')
@@ -109,10 +109,10 @@ feature 'Token Authentication' do
   end
 
   scenario 'logging out' do
-    token_log_in_as('james.darling@digital.justice.gov.uk')
+    token_log_in_as('james.darling@cabinetoffice.gov.uk')
     expect(page).to have_text('James Darling')
     click_link 'Sign out'
-    expect(page).not_to have_text('james.darling@digital.justice.gov.uk')
+    expect(page).not_to have_text('james.darling@cabinetoffice.gov.uk')
     expect(login_page).to be_displayed
   end
 
@@ -120,9 +120,9 @@ feature 'Token Authentication' do
     create(:person,
       given_name: 'Example',
       surname: 'User',
-      email: 'example.user@digital.justice.gov.uk'
+      email: 'example.user@cabinetoffice.gov.uk'
     )
-    token_log_in_as('Example.USER@digital.justice.gov.uk')
+    token_log_in_as('Example.USER@cabinetoffice.gov.uk')
     expect(page).to have_text('Signed in as Example User')
   end
 

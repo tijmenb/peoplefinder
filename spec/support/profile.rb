@@ -4,7 +4,7 @@ module SpecSupport
       {
         given_name: 'Marco',
         surname: 'Polo',
-        email: 'marco.polo@digital.justice.gov.uk',
+        email: 'marco.polo@cabinetoffice.gov.uk',
         primary_phone_number: '+44-208-123-4567',
         secondary_phone_number: '07777777777',
         location_in_building: '10.999',

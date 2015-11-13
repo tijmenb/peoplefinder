@@ -12,7 +12,7 @@ feature 'Search for people', elastic: true do
       create(:person,
         given_name: 'Jon',
         surname: 'Browne',
-        email: 'jon.browne@digital.justice.gov.uk',
+        email: 'jon.browne@cabinetoffice.gov.uk',
         primary_phone_number: '0711111111',
         tags: 'Cooking,Eating',
         community: community)
@@ -22,7 +22,7 @@ feature 'Search for people', elastic: true do
       create(:department)
       Person.import
       Person.__elasticsearch__.client.indices.refresh
-      omni_auth_log_in_as 'test.user@digital.justice.gov.uk'
+      omni_auth_log_in_as 'test.user@cabinetoffice.gov.uk'
     end
 
     after do
@@ -38,7 +38,7 @@ feature 'Search for people', elastic: true do
         expect(page).to have_text('Search results')
       end
       expect(page).to have_text('Jon Browne')
-      expect(page).to have_text('jon.browne@digital.justice.gov.uk')
+      expect(page).to have_text('jon.browne@cabinetoffice.gov.uk')
       expect(page).to have_text('0711111111')
       expect(page).to have_text(community.name)
       expect(page).to have_link('add them', href: new_person_path)

@@ -7,7 +7,7 @@ feature "Communities" do
   enable_feature :communities
 
   before do
-    omni_auth_log_in_as 'test.user@digital.justice.gov.uk'
+    omni_auth_log_in_as 'test.user@cabinetoffice.gov.uk'
   end
 
   scenario 'Creating a person in a community' do

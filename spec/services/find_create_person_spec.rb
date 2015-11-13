@@ -26,7 +26,7 @@ RSpec.describe FindCreatePerson, type: :service do
   let(:valid_auth_hash) do
     {
       'info' => {
-        'email' => 'example.user@digital.justice.gov.uk',
+        'email' => 'example.user@cabinetoffice.gov.uk',
         'first_name' => 'John',
         'last_name' => 'Doe',
         'name' => 'John Doe'
@@ -53,7 +53,7 @@ RSpec.describe FindCreatePerson, type: :service do
       let(:auth_hash) { valid_auth_hash }
 
       it_behaves_like 'new person created' do
-        let(:expected_email) { 'example.user@digital.justice.gov.uk' }
+        let(:expected_email) { 'example.user@cabinetoffice.gov.uk' }
         let(:expected_name) { 'John Doe' }
       end
     end
@@ -65,7 +65,7 @@ RSpec.describe FindCreatePerson, type: :service do
   end
 
   describe '.from_token' do
-    let(:token) { Token.create(user_email: 'aled.jones@digital.justice.gov.uk') }
+    let(:token) { Token.create(user_email: 'aled.jones@cabinetoffice.gov.uk') }
     subject { described_class.from_token(token) }
 
     context 'for a new person' do
@@ -76,7 +76,7 @@ RSpec.describe FindCreatePerson, type: :service do
     end
 
     context 'for an existing person' do
-      let!(:person) { create(:person_with_multiple_logins, given_name: 'aled', surname: 'jones', email: 'aled.jones@digital.justice.gov.uk') }
+      let!(:person) { create(:person_with_multiple_logins, given_name: 'aled', surname: 'jones', email: 'aled.jones@cabinetoffice.gov.uk') }
 
       it_behaves_like 'existing person returned'
     end

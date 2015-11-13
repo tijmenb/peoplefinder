@@ -2,11 +2,11 @@ module SpecSupport
   module Login
     def mock_logged_in_user
       controller.session[::Login::SESSION_KEY] =
-        create(:person, email: 'test.user@digital.justice.gov.uk').id
+        create(:person, email: 'test.user@cabinetoffice.gov.uk').id
     end
 
     def current_user
-      Person.where(email: 'test.user@digital.justice.gov.uk').first
+      Person.where(email: 'test.user@cabinetoffice.gov.uk').first
     end
 
     def omni_auth_log_in_as(email)

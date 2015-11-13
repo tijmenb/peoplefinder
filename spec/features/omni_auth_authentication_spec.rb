@@ -66,7 +66,7 @@ def valid_user
   OmniAuth::AuthHash.new(
     provider: 'gplus',
     info: {
-      email: 'test.user@digital.justice.gov.uk',
+      email: 'test.user@cabinetoffice.gov.uk',
       first_name: 'John',
       last_name: 'Doe',
       name: 'John Doe'

@@ -28,7 +28,7 @@ RSpec.describe RandomGenerator do
     let(:groups_levels) { 2 }
     let(:groups_per_level) { 2 }
     let(:people_per_group) { 3 }
-    let(:domain) { 'digital.justice.gov.uk' }
+    let(:domain) { 'cabinetoffice.gov.uk' }
     before do
       subject.generate(groups_levels, groups_per_level, people_per_group, domain)
     end

@@ -4,7 +4,7 @@ RSpec.describe Token, type: :model do
   include PermittedDomainHelper
 
   let(:token) { build(:token) }
-  let(:person) { double(:person, email: 'text.user@digital.justice.gov.uk') }
+  let(:person) { double(:person, email: 'text.user@cabinetoffice.gov.uk') }
 
   it 'generates a token' do
     expect(token.value).to match(/\A[a-z0-9\-]{36}\z/)

@@ -6,7 +6,7 @@ RSpec.describe AuditVersionPresenter, type: :presenter do
   let(:created_at) { DateTime.now }
 
   let(:previous_email) { 'f.smith@smithmeister.com' }
-  let(:new_email)      { 'f.smith@digital.justice.gov.uk' }
+  let(:new_email)      { 'f.smith@cabinetoffice.gov.uk' }
   let(:new_given_name) { 'Fred' }
   let(:new_surname)    { 'Smith' }
   let(:object_changes) {

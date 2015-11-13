@@ -4,7 +4,7 @@ feature 'Audit trail' do
   include PermittedDomainHelper
 
   before do
-    omni_auth_log_in_as 'test.user@digital.justice.gov.uk'
+    omni_auth_log_in_as 'test.user@cabinetoffice.gov.uk'
   end
 
   scenario 'Auditing an edit of a person' do

@@ -3,9 +3,9 @@ require 'rails_helper'
 RSpec.describe SuggestionMailer do
   include PermittedDomainHelper
 
-  let(:suggester) { create(:person, email: 'suggester@digital.justice.gov.uk') }
-  let(:person)    { create(:person, email: 'person@digital.justice.gov.uk') }
-  let(:admin)     { create(:person,  email: 'admin@digital.justice.gov.uk') }
+  let(:suggester) { create(:person, email: 'suggester@cabinetoffice.gov.uk') }
+  let(:person)    { create(:person, email: 'person@cabinetoffice.gov.uk') }
+  let(:admin)     { create(:person,  email: 'admin@cabinetoffice.gov.uk') }
 
   def expect_mail_body_text(text)
     %w[plain html].each do |part_type|

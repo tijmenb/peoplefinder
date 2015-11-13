@@ -18,7 +18,7 @@ end
 RSpec.describe UserUpdateMailer do
   include PermittedDomainHelper
 
-  let(:person) { create(:person, email: 'test.user@digital.justice.gov.uk') }
+  let(:person) { create(:person, email: 'test.user@cabinetoffice.gov.uk') }
 
   describe ".new_profile_email" do
     subject(:mail) { described_class.new_profile_email(person).deliver_now }

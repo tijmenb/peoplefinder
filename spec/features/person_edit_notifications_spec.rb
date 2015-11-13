@@ -4,7 +4,7 @@ feature 'Person edit notifications' do
   include ActiveJobHelper
   include PermittedDomainHelper
 
-  let(:person) { create(:person, email: 'test.user@digital.justice.gov.uk') }
+  let(:person) { create(:person, email: 'test.user@cabinetoffice.gov.uk') }
   before do
     omni_auth_log_in_as(person.email)
   end
@@ -14,7 +14,7 @@ feature 'Person edit notifications' do
 
     fill_in 'First name', with: 'Bob'
     fill_in 'Surname', with: 'Smith'
-    fill_in 'Main email', with: 'bob.smith@digital.justice.gov.uk'
+    fill_in 'Main email', with: 'bob.smith@cabinetoffice.gov.uk'
     expect {
       click_button 'Save', match: :first
     }.to change { ActionMailer::Base.deliveries.count }.by(1)
@@ -22,11 +22,11 @@ feature 'Person edit notifications' do
     expect(last_email.subject).to eq('You’re on MOJ People Finder, check your profile today')
 
     check_email_to_and_from
-    check_email_has_profile_link(Person.where(email: 'bob.smith@digital.justice.gov.uk').first)
+    check_email_has_profile_link(Person.where(email: 'bob.smith@cabinetoffice.gov.uk').first)
   end
 
   scenario 'Deleting a person with different email' do
-    person = create(:person, email: 'bob.smith@digital.justice.gov.uk')
+    person = create(:person, email: 'bob.smith@cabinetoffice.gov.uk')
     visit edit_person_path(person)
     expect { click_link('Delete this profile') }.to change { ActionMailer::Base.deliveries.count }.by(1)
 
@@ -40,7 +40,7 @@ feature 'Person edit notifications' do
   end
 
   scenario 'Editing a person with different email' do
-    person = create(:person, given_name: 'Bob', surname: 'Smith', email: 'bob.smith@digital.justice.gov.uk')
+    person = create(:person, given_name: 'Bob', surname: 'Smith', email: 'bob.smith@cabinetoffice.gov.uk')
     visit person_path(person)
     click_link 'Edit this profile'
     fill_in 'Surname', with: 'Smelly Pants'
@@ -64,7 +64,7 @@ feature 'Person edit notifications' do
   end
 
   scenario 'Verifying the link to bob that is render in the emails' do
-    bob = create(:person, email: 'bob@digital.justice.gov.uk', surname: 'bob')
+    bob = create(:person, email: 'bob@cabinetoffice.gov.uk', surname: 'bob')
     visit token_url(Token.for_person(bob), desired_path: person_path(bob))
 
     within('h1') do
@@ -73,7 +73,7 @@ feature 'Person edit notifications' do
   end
 
   def check_email_to_and_from
-    expect(last_email.to).to eql(['bob.smith@digital.justice.gov.uk'])
-    expect(last_email.body.encoded).to match('test.user@digital.justice.gov.uk')
+    expect(last_email.to).to eql(['bob.smith@cabinetoffice.gov.uk'])
+    expect(last_email.body.encoded).to match('test.user@cabinetoffice.gov.uk')
   end
 end

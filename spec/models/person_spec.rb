@@ -66,7 +66,7 @@ RSpec.describe Person, type: :model do
 
   context 'slug' do
     it 'generates from the first part of the email address if present' do
-      person = create(:person, email: 'user.example@digital.justice.gov.uk')
+      person = create(:person, email: 'user.example@cabinetoffice.gov.uk')
       person.reload
       expect(person.slug).to eql('user-example')
     end

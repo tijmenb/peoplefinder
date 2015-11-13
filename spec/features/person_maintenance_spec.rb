@@ -4,7 +4,7 @@ feature 'Person maintenance' do
   include PermittedDomainHelper
   include ActiveJobHelper
 
-  let(:person) { create(:person, email: 'test.user@digital.justice.gov.uk') }
+  let(:person) { create(:person, email: 'test.user@cabinetoffice.gov.uk') }
   before do
     omni_auth_log_in_as person.email
   end
@@ -91,7 +91,7 @@ feature 'Person maintenance' do
 
     scenario 'Creating a person with invalid e-mail raises an error' do
       new_profile_page.load
-      new_profile_page.form.email.set 'invalid email@digital.justice.gov.uk'
+      new_profile_page.form.email.set 'invalid email@cabinetoffice.gov.uk'
       new_profile_page.form.save.click
 
       expect(new_profile_page.form).to have_email_error
@@ -115,6 +115,7 @@ feature 'Person maintenance' do
 
       click_button 'Save', match: :first
 
+      expect(page).to have_text('Duplicate names found')
       expect(page).to have_text('1 result found')
       click_button 'Continue'
       check_creation_of_profile_details
@@ -296,7 +297,7 @@ feature 'Person maintenance' do
   end
 
   context 'Viewing another person\'s profile' do
-    let(:another_person) { create(:person, email: 'someone.else@digital.justice.gov.uk') }
+    let(:another_person) { create(:person, email: 'someone.else@cabinetoffice.gov.uk') }
 
     scenario 'when it is complete' do
       complete_profile!(another_person)
