@@ -3,15 +3,18 @@ require 'rails_helper'
 RSpec.describe 'Completion' do # rubocop:disable RSpec/DescribeClass
   include PermittedDomainHelper
 
+  let(:building) { create(:building, address: '102 Petty France') }
+  let(:city) { create(:city, name: 'London') }
+
   let(:completed_attributes) {
     {
       given_name: 'Bobby',
       surname: 'Tables',
-      email: 'user.example@digital.justice.gov.uk',
+      email: 'user.example@cabinetoffice.gov.uk',
       primary_phone_number: '020 7946 0123',
       location_in_building: '13.13',
-      building: '102 Petty France',
-      city: 'London',
+      building: building,
+      city: city,
       description: 'I am a real person',
       profile_photo_id: profile_photo.id
     }
@@ -38,7 +41,7 @@ RSpec.describe 'Completion' do # rubocop:disable RSpec/DescribeClass
         given_name: generate(:given_name),
         surname: generate(:surname),
         email: generate(:email),
-        city: generate(:city),
+        city: create(:city),
         primary_phone_number: generate(:phone_number)
       )
       expect(person.completion_score).to eql(55)
@@ -69,7 +72,7 @@ RSpec.describe 'Completion' do # rubocop:disable RSpec/DescribeClass
           given_name: generate(:given_name),
           surname: generate(:surname),
           email: generate(:email),
-          city: generate(:city),
+          city: create(:city),
           primary_phone_number: generate(:phone_number)
         )
       end
@@ -82,7 +85,7 @@ RSpec.describe 'Completion' do # rubocop:disable RSpec/DescribeClass
           given_name: generate(:given_name),
           surname: generate(:surname),
           email: generate(:email),
-          city: generate(:city),
+          city: create(:city),
           primary_phone_number: generate(:phone_number)
         )
       }
@@ -123,27 +126,27 @@ RSpec.describe 'Completion' do # rubocop:disable RSpec/DescribeClass
     end
 
     it 'returns the person when there is no primary phone number' do
-      Person.update_all 'primary_phone_number = \'\''
+      Person.update_all primary_phone_number: nil
       expect(subject).to include(person)
     end
 
     it 'returns the person when there is no location in building' do
-      Person.update_all 'location_in_building = \'\''
+      Person.update_all location_in_building: nil
       expect(subject).to include(person)
     end
 
     it 'returns the person when there is no building' do
-      Person.update_all 'building = \'\''
+      Person.update_all building_id: nil
       expect(subject).to include(person)
     end
 
     it 'returns the person when there is no city' do
-      Person.update_all 'city = \'\''
+      Person.update_all city_id: nil
       expect(subject).to include(person)
     end
 
     it 'returns the person when there is no image' do
-      Person.update_all 'profile_photo_id = null'
+      Person.update_all profile_photo_id: nil
       expect(subject).to include(person)
     end
   end

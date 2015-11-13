@@ -52,6 +52,8 @@ end
 group :development do
   gem 'foreman'
   gem 'mailcatcher'
+  gem 'brakeman', require: false
+  gem 'spring-commands-rspec'
 end
 
 group :development, :development, :test do
@@ -59,20 +61,10 @@ group :development, :development, :test do
 end
 
 group :development, :test do
-  gem 'brakeman'
-  gem 'capybara'
   gem 'jshint'
-  gem 'launchy'
-  gem 'minitest'
-  gem 'poltergeist'
   gem 'pry-rails'
   gem 'pry-byebug'
   gem 'rspec-rails'
-  gem 'spring-commands-rspec'
-  gem 'shoulda-matchers'
-  gem 'simplecov'
-  gem 'simplecov-rcov'
-  gem 'timecop'
 end
 
 group :development, :test, :assets do
@@ -84,4 +76,12 @@ group :test do
   gem 'fuubar'
   gem 'database_cleaner'
   gem 'site_prism'
+  gem 'capybara'
+  gem 'launchy'
+  gem 'minitest'
+  gem 'poltergeist'
+  gem 'timecop'
+  gem 'simplecov', require: false
+  gem 'simplecov-rcov', require: false
+  gem 'shoulda-matchers', require: false
 end
