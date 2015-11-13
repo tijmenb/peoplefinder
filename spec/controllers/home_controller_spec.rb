@@ -30,7 +30,7 @@ RSpec.describe HomeController, type: :controller do
 
       it 'assigns the group to the top_level_group' do
         get :show
-        expect(assigns(:group).name).to eql('Ministry of Justice')
+        expect(assigns(:group).name).to eql(brand)
       end
     end
   end

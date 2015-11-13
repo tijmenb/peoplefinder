@@ -115,7 +115,7 @@ feature 'Group maintenance' do
       click_link 'Edit'
     end
 
-    click_on_team_in_org_browser 'Ministry of Justice'
+    click_on_team_in_org_browser brand
     click_button 'Save'
 
     expect(page).to have_content('Updated Cyberdigital Cyberservices')
