@@ -161,14 +161,15 @@ RSpec.describe Person, type: :model do
   describe '#location' do
     it 'concatenates location_in_building, location, and city' do
       person.location_in_building = '99.99'
-      person.building = '102 Petty France'
-      person.city = 'London'
-      expect(person.location).to eq('99.99, 102 Petty France, London')
+      building = Building.take
+      person.building = building
+      person.city = City.where(name: 'London').first
+      expect(person.location).to eq("99.99, #{building.to_human}, London")
     end
 
     it 'skips blank fields' do
       person.location_in_building = 'At home'
-      person.building = ''
+      person.building = Building.create(address: '')
       person.city = nil
       expect(person.location).to eq('At home')
     end

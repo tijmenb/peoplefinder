@@ -8,8 +8,8 @@ module SpecSupport
         primary_phone_number: '+44-208-123-4567',
         secondary_phone_number: '07777777777',
         location_in_building: '10.999',
-        building: '102 Petty France',
-        city: 'London',
+        building: Building.take,
+        city: City.take,
         description: 'Lorem ipsum dolor sit amet...'
       }
     end
@@ -32,8 +32,8 @@ module SpecSupport
       fill_in 'Main phone number', with: person_attributes[:primary_phone_number]
       fill_in 'Alternative phone number', with: person_attributes[:secondary_phone_number]
       fill_in 'Location in building', with: person_attributes[:location_in_building]
-      fill_in 'Building', with: person_attributes[:building]
-      fill_in 'City', with: person_attributes[:city]
+      find('#person_building_id').find(:option, person_attributes[:building].try(:to_human)).select_option
+      find('#person_city_id').find(:option, person_attributes[:city].try(:to_human)).select_option
       fill_in 'Extra information', with: person_attributes[:description]
       uncheck('Monday')
       uncheck('Friday')
@@ -48,8 +48,8 @@ module SpecSupport
       expect(page).to have_text(person_attributes[:primary_phone_number])
       expect(page).to have_text(person_attributes[:secondary_phone_number])
       expect(page).to have_text(person_attributes[:location_in_building])
-      expect(page).to have_text(person_attributes[:building])
-      expect(page).to have_text(person_attributes[:city])
+      expect(page).to have_text(person_attributes[:building].try(:to_human))
+      expect(page).to have_text(person_attributes[:city].try(:to_human))
       expect(page).to have_text(person_attributes[:description])
 
       within('ul.working_days') do

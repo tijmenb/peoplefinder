@@ -12,8 +12,8 @@ RSpec.describe PersonSearch, elastic: true do
   }
   let!(:bob) {
     create(:person, given_name: 'Bob', surname: 'Browning',
-           location_in_building: '10th floor', building: '102 Petty France',
-           city: 'London', description: 'weekends only')
+           location_in_building: '10th floor', building: Building.take,
+           city: City.take, description: 'weekends only')
   }
   let!(:digital_services) { create(:group, name: 'Digital Services') }
   let!(:membership) { bob.memberships.create(group: digital_services, role: 'Cleaner') }

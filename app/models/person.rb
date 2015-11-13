@@ -111,7 +111,7 @@ class Person < ActiveRecord::Base
 
   # concatenated_field :location, :location_in_building, :building, :city, join_with: ', '
   def location
-    [self.location_in_building, self.building.try(:address), self.city.try(:name)]. \
+    [self.location_in_building, self.building.try(:to_human), self.city.try(:to_human)]. \
       select(&:present?). \
       join(', ')
   end

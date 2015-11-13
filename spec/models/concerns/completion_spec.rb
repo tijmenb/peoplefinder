@@ -3,9 +3,6 @@ require 'rails_helper'
 RSpec.describe 'Completion' do # rubocop:disable RSpec/DescribeClass
   include PermittedDomainHelper
 
-  let(:building) { create(:building, address: '102 Petty France') }
-  let(:city) { create(:city, name: 'London') }
-
   let(:completed_attributes) {
     {
       given_name: 'Bobby',
@@ -13,8 +10,8 @@ RSpec.describe 'Completion' do # rubocop:disable RSpec/DescribeClass
       email: 'user.example@cabinetoffice.gov.uk',
       primary_phone_number: '020 7946 0123',
       location_in_building: '13.13',
-      building: building,
-      city: city,
+      building: Building.take,
+      city: City.take,
       description: 'I am a real person',
       profile_photo_id: profile_photo.id
     }

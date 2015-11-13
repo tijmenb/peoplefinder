@@ -21,8 +21,6 @@ FactoryGirl.define do
     given_name
     surname
     email
-    city
-    building
 
     factory :person_with_multiple_logins do
       login_count 10
