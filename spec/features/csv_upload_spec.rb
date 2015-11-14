@@ -65,6 +65,6 @@ feature 'Upload CSV' do
     msg = ActionMailer::Base.deliveries.reverse.find { |d| d.to.include?(addr) }
     expect(msg).not_to be_nil
 
-    expect(msg.subject).to eq('You’re on CO People Finder, check your profile today')
+    expect(msg.subject).to eq('You’re on People Finder, check your profile today')
   end
 end

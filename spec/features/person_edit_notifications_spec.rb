@@ -19,7 +19,7 @@ feature 'Person edit notifications' do
       click_button 'Save', match: :first
     }.to change { ActionMailer::Base.deliveries.count }.by(1)
 
-    expect(last_email.subject).to eq('You’re on CO People Finder, check your profile today')
+    expect(last_email.subject).to eq('You’re on People Finder, check your profile today')
 
     check_email_to_and_from
     check_email_has_profile_link(Person.where(email: 'bob.smith@cabinetoffice.gov.uk').first)
@@ -30,7 +30,7 @@ feature 'Person edit notifications' do
     visit edit_person_path(person)
     expect { click_link('Delete this profile') }.to change { ActionMailer::Base.deliveries.count }.by(1)
 
-    expect(last_email.subject).to eq('Your profile on CO People Finder has been deleted')
+    expect(last_email.subject).to eq('Your profile on People Finder has been deleted')
     check_email_to_and_from
   end
 
@@ -48,7 +48,7 @@ feature 'Person edit notifications' do
       click_button 'Save', match: :first
     }.to change { ActionMailer::Base.deliveries.count }.by(1)
 
-    expect(last_email.subject).to eq('Your profile on CO People Finder has been edited')
+    expect(last_email.subject).to eq('Your profile on People Finder has been edited')
 
     check_email_to_and_from
     check_email_has_profile_link(person)
