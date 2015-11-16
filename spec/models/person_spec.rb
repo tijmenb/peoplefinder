@@ -2,6 +2,8 @@ require 'rails_helper'
 
 RSpec.describe Person, type: :model do
   include PermittedDomainHelper
+  include BuildingsHelper
+  include CitiesHelper
 
   let(:person) { build(:person) }
   it { should validate_presence_of(:given_name).on(:update) }

@@ -3,6 +3,8 @@ require 'rails_helper'
 feature 'Person maintenance' do
   include PermittedDomainHelper
   include ActiveJobHelper
+  include BuildingsHelper
+  include CitiesHelper
 
   let(:person) { create(:person, email: 'test.user@cabinetoffice.gov.uk') }
   before do

@@ -2,6 +2,8 @@ require 'rails_helper'
 
 RSpec.describe 'Completion' do # rubocop:disable RSpec/DescribeClass
   include PermittedDomainHelper
+  include BuildingsHelper
+  include CitiesHelper
 
   let(:completed_attributes) {
     {
