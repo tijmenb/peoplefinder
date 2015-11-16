@@ -274,7 +274,8 @@ CREATE TABLE people (
     secondary_email text,
     profile_photo_id integer,
     building_id integer,
-    city_id integer
+    city_id integer,
+    staff_nr character varying
 );
 
 
@@ -793,4 +794,6 @@ INSERT INTO schema_migrations (version) VALUES ('20151110164612');
 INSERT INTO schema_migrations (version) VALUES ('20151111094306');
 
 INSERT INTO schema_migrations (version) VALUES ('20151111094711');
+
+INSERT INTO schema_migrations (version) VALUES ('20151116165003');
 

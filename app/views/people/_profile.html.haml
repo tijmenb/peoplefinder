@@ -20,6 +20,11 @@
             %dt Team
             %dd.breadcrumbs= breadcrumbs(membership.path.drop(1))
 
+      %dl.inline-labels.staff-nr
+        - if @person.staff_nr.present?
+          %dt Staff Number
+          %dd= @person.staff_nr
+
       %dl.inline-labels
         - if feature_enabled?(:communities)
           = render partial: "communities"

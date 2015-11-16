@@ -19,6 +19,7 @@ class Person < ActiveRecord::Base
     as_json(
       only: [:tags, :description, :location_in_building, :building, :city],
       methods: [:name, :role_and_group, :community_name]
+      only: [:tags, :description, :location_in_building, :building, :city, :staff_nr],
     )
   end
 

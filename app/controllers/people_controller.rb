@@ -91,7 +91,7 @@ private
       :given_name, :surname, :location_in_building, :building_id, :city_id,
       :primary_phone_number, :secondary_phone_number, :email, :secondary_email,
       :profile_photo_id, :crop_x, :crop_y, :crop_w, :crop_h,
-      :description, :tags, :community_id,
+      :description, :tags, :community_id, :staff_nr,
       *Person::DAYS_WORKED,
       memberships_attributes: [:id, :role, :group_id, :leader, :subscribed]
     ]

@@ -27,6 +27,13 @@
         %span.error= @person.errors[:surname].first
     = f.text_field :surname, class: 'form-control'
 
+  = f.form_group :staff_nr do
+    = f.label :staff_nr, class: 'form-label-bold' do
+      Staff Number
+      - if @person.errors.include?(:staff_nr)
+        %span.error= @person.errors[:staff_nr].first
+    = f.text_field :staff_nr, class: 'form-control'
+
 
   - if feature_enabled?("communities")
     = f.form_group :community_id do
