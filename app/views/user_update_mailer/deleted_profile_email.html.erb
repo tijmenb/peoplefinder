@@ -9,7 +9,7 @@
           </td>
         </tr>
         <tr>
-          <td width="560" align="left" valign="top" style="font-family:Arial, sans-serif;font-size:16px;font-weight:normal;line-height:30px;color:#434343;padding-bottom:20px;border-collapse:collapse;">
+          <td width="560" align="left" valign="top" style="font-family:Arial, sans-serif;font-size:16px;font-weight:normal;line-height:30px;color:#434343;border-collapse:collapse;">
             Hello <%= @name %>,
           </td>
         </tr>
@@ -19,7 +19,7 @@
               Just to let you know that your People Finder profile linked to this email address has been deleted<% if @by_email.present? %> by <%= @by_email %><% end %>.
             </p>
             <p>
-              If you have any questions about what’s happened, please ask your team lead or the person who deleted your profile.
+              If you have any questions about what’s happened, please ask the person who deleted your profile, or <a href="mailto:<%= Rails.configuration.support_email %>" target="_blank" style="color:#097FC9;">email us.</a>
             </p>
             <p>
               The People Finder Team

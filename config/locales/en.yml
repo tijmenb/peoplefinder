@@ -154,21 +154,21 @@ en:
       subject: "People Finder profile improvements"
   user_update_mailer:
     new_profile_email:
-      subject: "You’re on CO People Finder, check your profile today"
+      subject: "You’re on People Finder, check your profile today"
     updated_profile_email:
-      subject: "Your profile on CO People Finder has been edited"
+      subject: "Your profile on People Finder has been edited"
     deleted_profile_email:
-      subject: "Your profile on CO People Finder has been deleted"
+      subject: "Your profile on People Finder has been deleted"
     updated_address_from_email:
-      subject: "This email address has been removed from a profile on CO People Finder"
+      subject: "This email address has been removed from a profile on People Finder"
     updated_address_to_email:
-      subject: "This email address has been added to a profile on CO People Finder"
+      subject: "This email address has been added to a profile on People Finder"
   group_update_mailer:
     inform_subscriber:
       subject: "People Finder team updated"
   token_mailer:
     new_token_email:
-      subject: 'Access request to CO People Finder'
+      subject: 'Access request to People Finder'
   errors: &errors
     information_request:
       message_required: "You must enter a message to be sent to the person"

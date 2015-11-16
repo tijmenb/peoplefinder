@@ -9,7 +9,7 @@
           </td>
         </tr>
         <tr>
-          <td width="560" align="left" valign="top" style="font-family:Arial, sans-serif;font-size:16px;font-weight:normal;line-height:30px;color:#434343;padding-bottom:20px;border-collapse:collapse;">
+          <td width="560" align="left" valign="top" style="font-family:Arial, sans-serif;font-size:16px;font-weight:normal;line-height:30px;color:#434343;border-collapse:collapse;">
             Hello <%= @person.given_name %>,
           </td>
         </tr>
@@ -17,34 +17,32 @@
           <td width="560" align="left" valign="top" style="font-family:Arial, sans-serif;font-size:16px;font-weight:normal;line-height:30px;color:#434343;padding-bottom:20px;border-collapse:collapse;">
 
             <p>
-              You’ve just been added to People Finder - the new way to
-              share your details and find colleagues<% if @by_email %> - by <%=
-              @by_email %><% end %>.
+              You’ve just been added to People Finder - the new Cabinet Office service to share your details and find colleagues.
             </p>
+
+            <table cellpadding="0" cellspacing="0" border="0" style="padding-left:20px">
+              <tr>
+                <td>
+                    <img src="<%= @person.profile_image.try(:medium) || 'medium_no_photo.png' %>" width="70" height="70" />
+                </td>
+                <td style="line-height:10px; padding-left:15px; font-weight:normal;">
+                    <p><%= @person.name %></p>
+                    <p>Cabinet Office</p>
+                </td>
+              </tr>
+            </table>
 
             <p>
               To check your profile, visit
-              <%= link_to @profile_url, @profile_url %> today.
+              <%= link_to @profile_url, @profile_url, style:'color:#097FC9;' %> today.
             </p>
 
             <p>
-              For security reasons, you’ll need to enter this work email
-              address when prompted.
+              For security reasons, you’ll need to login to the service using your government email address.
             </p>
 
             <p>
-              It’s easy to view and update your People Finder profile. The
-              more details you add, the easier it is for colleagues to
-              recognise and get in touch with you when you’re working.
-            </p>
-
-            <p>
-              If you have any questions about People Finder, ask your team
-              lead or check the intranet for more information.
-            </p>
-
-            <p>
-              The People Finder Team
+              If you have any questions about People Finder, check the intranet for more information, or <a href="mailto:<%= Rails.configuration.support_email %>" target="_blank" style="color:#097FC9;">email us.</a>
             </p>
           </td>
         </tr>
