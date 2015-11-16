@@ -29,6 +29,11 @@ class ImageUploader < CarrierWave::Uploader::Base
     process quality: 60
   end
 
+  version :small do
+    process :crop
+    process resize_to_fill: [70,70]
+  end
+
   version :croppable
 
   def crop
