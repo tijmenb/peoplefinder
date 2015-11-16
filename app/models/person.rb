@@ -54,6 +54,10 @@ class Person < ActiveRecord::Base
     end
   end
 
+  def profile_image_source
+    self.profile_photo.try(:image).try(:medium) || 'medium_no_photo.png'
+  end
+
   validates :given_name, presence: true, on: :update
   validates :surname, presence: true
   validates :email,
