@@ -54,6 +54,7 @@ module Peoplefinder
     config.rack_timeout = (ENV['RACK_TIMEOUT'] || 14)
 
     config.max_tokens_per_hour = ENV['MAX_TOKENS_PER_HOUR']
+    config.token_ttl = Interger(ENV['TOKEN_TTL_IN_HOURS']) * 60 * 60 if ENV['TOKEN_TTL_IN_HOURS'].present?
 
     config.action_mailer.default_url_options = {
       host: ENV['ACTION_MAILER_DEFAULT_URL']
