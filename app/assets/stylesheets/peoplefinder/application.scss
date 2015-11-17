@@ -473,4 +473,13 @@ textarea.form-control {
   margin: 30px 0;
 }
 
+.new_token .gov-uk-field-error {
+  margin-bottom:0px
+}
+
+.new_token .gov-uk-field-error + div.spacer-20 {
+  clear:both;
+}
+
+
 @import 'retinal_images';
