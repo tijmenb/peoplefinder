@@ -35,6 +35,10 @@ private
       :surname
     when /email|e-mail/i
       :email
+    when /photo/i
+      :profile_photo
+    when /staff/i
+      :staff_nr
     else
       nil
     end
