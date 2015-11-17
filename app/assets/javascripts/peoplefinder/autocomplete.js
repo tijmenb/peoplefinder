@@ -3,26 +3,27 @@
 var TeamAutocomplete = (function (){
   var TeamAutocomplete = {
     transformations: [
-      // replace Ministry of Justice with MoJ
+      // replace Cabinet Office with CO
       function (o){
-        if($.trim(o.innerHTML) !== 'Ministry of Justice'){
-          o.innerHTML = o.innerHTML.replace('Ministry of Justice', 'MOJ');
+        if($.trim(o.innerHTML) !== 'Cabinet Office'){
+          o.innerHTML = o.innerHTML.replace('Cabinet Office', 'CO');
         }
       }
     ],
 
     formatResults: function ( o ){
+      console.log(o);
       var name, path = '';
-      if( o.text === 'Ministry of Justice' ){
-        name = 'Ministry of Justice';
-        path = '<span class="hidden">Ministry of Justice</span>';
+      if( o.text === 'Cabinet Office' ){
+        name = 'Cabinet Office';
+        path = '<span class="hidden">Cabinet Office</span>';
       }else{
         name = o.text.substring(0, o.text.indexOf('[') - 1);
         path = o.text.substring(o.text.indexOf('['));
       }
 
       if( path.length > 70 ){
-        var p = path.slice(1, -1).replace('MOJ > ', '');
+        var p = path.slice(1, -1).replace('CO > ', '');
 
         path = _.reduce(p.split(' > ').reverse(), function (str, x){
           var nstr = x + ' > ' + str;
