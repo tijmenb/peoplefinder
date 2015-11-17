@@ -12,7 +12,6 @@ var TeamAutocomplete = (function (){
     ],
 
     formatResults: function ( o ){
-      console.log(o);
       var name, path = '';
       if( o.text === 'Cabinet Office' ){
         name = 'Cabinet Office';
