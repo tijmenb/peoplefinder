@@ -32,8 +32,8 @@ module SpecSupport
       fill_in 'Main phone number', with: person_attributes[:primary_phone_number]
       fill_in 'Alternative phone number', with: person_attributes[:secondary_phone_number]
       fill_in 'Location in building', with: person_attributes[:location_in_building]
-      find('#person_building_id').find(:option, person_attributes[:building].try(:to_human)).select_option
-      find('#person_city_id').find(:option, person_attributes[:city].try(:to_human)).select_option
+      find('#person_building_id').find(:option, person_attributes[:building].address).select_option
+      find('#person_city_id').find(:option, person_attributes[:city].name).select_option
       fill_in 'Extra information', with: person_attributes[:description]
       uncheck('Monday')
       uncheck('Friday')
@@ -48,8 +48,8 @@ module SpecSupport
       expect(page).to have_text(person_attributes[:primary_phone_number])
       expect(page).to have_text(person_attributes[:secondary_phone_number])
       expect(page).to have_text(person_attributes[:location_in_building])
-      expect(page).to have_text(person_attributes[:building].try(:to_human))
-      expect(page).to have_text(person_attributes[:city].try(:to_human))
+      expect(page).to have_text(person_attributes[:building].address)
+      expect(page).to have_text(person_attributes[:city].name)
       expect(page).to have_text(person_attributes[:description])
 
       within('ul.working_days') do

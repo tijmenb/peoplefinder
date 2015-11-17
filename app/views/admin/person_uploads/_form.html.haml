@@ -21,7 +21,10 @@
       - if f.object.errors.include?(:file)
         %span.error= f.object.errors[:file].first
     %p.form-hint
-      =info_text('hint_person_upload_file_html')
+      = info_text('hint_person_upload_file')
+      - PersonCsvImporter::COLUMNS.each do |field|
+        %code= field
+
     = f.file_field :file
 
   %fieldset

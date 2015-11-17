@@ -17,8 +17,8 @@ class Person < ActiveRecord::Base
 
   def as_indexed_json(_options = {})
     as_json(
-      only: [:tags, :description, :location_in_building, :building, :city],
-      methods: [:name, :role_and_group, :community_name]
+      only: [:tags, :description, :location_in_building, :staff_nr],
+      methods: [:name, :role_and_group, :community_name, :building_address, :city_name]
     )
   end
 
@@ -92,10 +92,6 @@ class Person < ActiveRecord::Base
     find_by_sql([query, group_ids])
   end
 
-  def to_s
-    name
-  end
-
   def role_and_group
     memberships.join('; ')
   end
@@ -109,15 +105,15 @@ class Person < ActiveRecord::Base
   end
 
   delegate :name, to: :community, prefix: true, allow_nil: true
+  delegate :address, to: :building, prefix: true, allow_nil: true
+  delegate :name,    to: :city,     prefix: true, allow_nil: true
 
   include Concerns::ConcatenatedFields
   concatenated_field :name, :given_name, :surname, join_with: ' '
+  concatenated_field :location, :location_in_building, :building_address, :city_name, join_with: ', '
 
-  # concatenated_field :location, :location_in_building, :building, :city, join_with: ', '
-  def location
-    [self.location_in_building, self.building.try(:to_human), self.city.try(:to_human)]. \
-      select(&:present?). \
-      join(', ')
+  def to_s
+    name
   end
 
   def notify_of_change?(person_responsible)

@@ -4,7 +4,7 @@ require 'forwardable'
 class PersonCsvImporter
   extend Forwardable
 
-  COLUMNS = %i[given_name surname email]
+  COLUMNS = %i[given_name surname email profile_photo staff_nr]
 
   ErrorRow = Struct.new(:line_number, :raw, :messages) do
     def to_s
@@ -40,7 +40,9 @@ private
   def_delegators :@parser, :records, :header
 
   def clean_fields(hash)
-    hash.merge(email: EmailExtractor.new.extract(hash[:email]))
+    hash.
+      merge(email: EmailExtractor.new.extract(hash[:email])).
+      merge(profile_photo: ProfilePhoto.find_by(id: hash[:profile_photo]))
   end
 
   def parse_csv(serialized)
