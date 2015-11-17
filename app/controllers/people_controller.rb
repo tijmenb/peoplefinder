@@ -20,12 +20,16 @@ class PeopleController < ApplicationController
   def new
     @person = Person.new
     @person.memberships.build
+    @person.build_building
+    @person.build_city
   end
 
   # GET /people/1/edit
   def edit
     @activity = params[:activity]
     @person.memberships.build if @person.memberships.empty?
+    @person.build_building  unless @person.building
+    @person.build_city      unless @person.city
   end
 
   # POST /people
@@ -93,7 +97,9 @@ private
       :profile_photo_id, :crop_x, :crop_y, :crop_w, :crop_h,
       :description, :tags, :community_id, :staff_nr,
       *Person::DAYS_WORKED,
-      memberships_attributes: [:id, :role, :group_id, :leader, :subscribed]
+      memberships_attributes: [:id, :role, :group_id, :leader, :subscribed],
+      city_attributes: [:id, :name],
+      building_attributes: [:id, :address],
     ]
   end
 

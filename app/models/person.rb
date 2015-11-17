@@ -3,8 +3,12 @@ class Person < ActiveRecord::Base
   include Concerns::WorkDays
   include Concerns::ExposeMandatoryFields
   belongs_to :profile_photo
+
   belongs_to :city
+  accepts_nested_attributes_for :city
+
   belongs_to :building
+  accepts_nested_attributes_for :building
 
   extend FriendlyId
   friendly_id :slug_source, use: :slugged
@@ -58,7 +62,7 @@ class Person < ActiveRecord::Base
     self.profile_photo.try(:image).try(version) || 'medium_no_photo.png'
   end
 
-  validates :given_name, presence: true, on: :update
+  validates :given_name, presence: true, on: [:create, :update]
   validates :surname, presence: true
   validates :email,
     presence: true, uniqueness: { case_sensitive: false }, email: true
