@@ -20,6 +20,20 @@ $(function() {
     $(this).parents('.membership').remove();
   });
 
+  $('select#person_building_id').change(function(e) {
+    e.preventDefault();
+    if( $(this).find("option:selected").text() == 'Other...' ){
+      $(this).closest('.form-group').find('.select_custom_field').show();
+    }
+  });
+
+  $('select#person_city_id').change(function(e) {
+    e.preventDefault();
+    if( $(this).find("option:selected").text() == 'Other...' ){
+      $(this).closest('.form-group').find('.select_custom_field').show();
+    }
+  });
+
   $(document).on('click', 'a.show-editable-fields', function(e) {
     e.preventDefault();
     $(this).closest('.editable-summary').hide();
