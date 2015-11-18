@@ -5,10 +5,10 @@ class Person < ActiveRecord::Base
   belongs_to :profile_photo
 
   belongs_to :city
-  accepts_nested_attributes_for :city
+  accepts_nested_attributes_for :city, reject_if: proc { |city| city['name'].blank? }
 
   belongs_to :building
-  accepts_nested_attributes_for :building
+  accepts_nested_attributes_for :building, reject_if: proc { |building| building['address'].blank? }
 
   extend FriendlyId
   friendly_id :slug_source, use: :slugged

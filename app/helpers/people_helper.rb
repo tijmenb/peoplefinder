@@ -38,7 +38,7 @@ module PeopleHelper
 
   private
     def select_other
-      ['Other...', '']
+      ['Other...', nil]
     end
 
 end

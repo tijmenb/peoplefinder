@@ -1,3 +1,4 @@
+=console
 = editing_mode(building)
 = form_for @person, builder: PersonFormBuilder, html: { multipart: true, class: person_form_class(@person, @activity) } do |f|
 
@@ -79,7 +80,7 @@
         = f.select :building_id, buildings_options(@person), {include_blank: '- select city -'}, class: 'form-control'
         .select_custom_field
           = f.fields_for :building do |building_f|
-            = building_f.text_field :address, class: 'form-control'
+            = building_f.text_field :address, disabled: 'disabled', class: 'form-control'
 
       = f.form_group :city do
         = f.label :city, class: 'form-label-bold' do
@@ -88,7 +89,7 @@
         = f.select :city_id, cities_options(@person), {include_blank: '- select building -'}, class: 'form-control'
         .select_custom_field
           = f.fields_for :city do |city_f|
-            = city_f.text_field :name, class: 'form-control'
+            = city_f.text_field :name, disabled: 'disabled', class: 'form-control'
 
   .form-group
     #memberships

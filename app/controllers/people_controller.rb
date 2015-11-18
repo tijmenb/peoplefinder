@@ -98,8 +98,8 @@ private
       :description, :tags, :community_id, :staff_nr,
       *Person::DAYS_WORKED,
       memberships_attributes: [:id, :role, :group_id, :leader, :subscribed],
-      city_attributes: [:id, :name],
-      building_attributes: [:id, :address],
+      city_attributes: [:name],
+      building_attributes: [:address],
     ]
   end
 

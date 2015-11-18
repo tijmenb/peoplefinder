@@ -22,15 +22,23 @@ $(function() {
 
   $('select#person_building_id').change(function(e) {
     e.preventDefault();
-    if( $(this).find("option:selected").text() == 'Other...' ){
-      $(this).closest('.form-group').find('.select_custom_field').show();
+    if( $(this).find("option:selected").text() == 'Other...' ) {
+      var custom_field = $(this).closest('.form-group').find('.select_custom_field');
+      custom_field.show();
+      var custom_field_input = custom_field.find('#person_building_attributes_address')[0];
+      custom_field_input.value = '';
+      custom_field_input.disabled = false;
     }
   });
 
   $('select#person_city_id').change(function(e) {
     e.preventDefault();
     if( $(this).find("option:selected").text() == 'Other...' ){
-      $(this).closest('.form-group').find('.select_custom_field').show();
+      var custom_field = $(this).closest('.form-group').find('.select_custom_field');
+      custom_field.show();
+      var custom_field_input = custom_field.find('#person_city_attributes_name')[0];
+      custom_field_input.value = '';
+      custom_field_input.disabled = false;
     }
   });
 
