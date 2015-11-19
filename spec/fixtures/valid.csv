@@ -1,3 +1,3 @@
-email,given_name,surname
-peter.bly@cabinetoffice.gov.uk,Peter,Bly
-jon.o.carey@cabinetoffice.gov.uk,Jon,O'Carey
+email,given_name,surname,profile_photo,staff_nr,secondary_phone_number
+peter.bly@cabinetoffice.gov.uk,Peter,Bly,1,000001,07700000000
+jon.o.carey@cabinetoffice.gov.uk,Jon,O'Carey,2,000002,07700000002
