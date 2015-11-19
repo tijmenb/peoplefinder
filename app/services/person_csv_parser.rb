@@ -39,7 +39,7 @@ private
       :profile_photo
     when /staff/i
       :staff_nr
-    when /phone_number/i
+    when /phone/i
       :secondary_phone_number
     else
       nil

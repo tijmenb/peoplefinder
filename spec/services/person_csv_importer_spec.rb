@@ -17,9 +17,9 @@ RSpec.describe PersonCsvImporter, type: :service do
       context 'when all people have surname and email' do
         let(:csv) do
           <<-CSV.strip_heredoc
-            email,given_name,surname
-            peter.bly@valid.gov.uk,Peter,Bly
-            jon.o.carey@valid.gov.uk,Jon,O'Carey
+            email,given_name,surname,profile_photo,staff_nr,secondary_phone_number
+            peter.bly@valid.gov.uk,Peter,Bly,1,000001,07700000001
+            jon.o.carey@valid.gov.uk,Jon,O'Carey,2,000002,07700000002
           CSV
         end
 
@@ -33,10 +33,10 @@ RSpec.describe PersonCsvImporter, type: :service do
       context 'when some people have incorrect details' do
         let(:csv) do
           <<-CSV.strip_heredoc
-            email,given_name,surname
-            peter.bly@valid.gov.uk,Peter,Bly
-            jon.o. carey@valid.gov.uk,Jon,O'Carey
-            jack@invalid.gov.uk,Jack,
+            email,given_name,surname,profile_photo,staff_nr,secondary_phone_number
+            peter.bly@valid.gov.uk,Peter,Bly,1,000001,07700000001
+            jon.o. carey@valid.gov.uk,Jon,O'Carey,2,000002,07700000002
+            jack@invalid.gov.uk,Jack,,3,000003,07700000003
           CSV
         end
 
@@ -45,11 +45,11 @@ RSpec.describe PersonCsvImporter, type: :service do
         it 'errors contain missing columns' do
           expect(importer.errors).to match_array([
             PersonCsvImporter::ErrorRow.new(
-              3, "jon.o. carey@valid.gov.uk,Jon,O'Carey",
+              3, "jon.o. carey@valid.gov.uk,Jon,O'Carey,2,000002,07700000002",
               ['Main email isn’t valid']
             ),
             PersonCsvImporter::ErrorRow.new(
-              4, "jack@invalid.gov.uk,Jack,",
+              4, "jack@invalid.gov.uk,Jack,,3,000003,07700000003",
               [
                 'Surname is required',
                 'Main email you have entered can’t be used to access People Finder'
@@ -77,7 +77,16 @@ RSpec.describe PersonCsvImporter, type: :service do
           ),
           PersonCsvImporter::ErrorRow.new(
             1, "email", ['surname column is missing']
-          )
+          ),
+          PersonCsvImporter::ErrorRow.new(
+            1, "email", ['profile_photo column is missing']
+          ),
+          PersonCsvImporter::ErrorRow.new(
+            1, "email", ['staff_nr column is missing']
+          ),
+          PersonCsvImporter::ErrorRow.new(
+            1, "email", ['secondary_phone_number column is missing']
+          ),
         ])
       end
     end
@@ -87,9 +96,9 @@ RSpec.describe PersonCsvImporter, type: :service do
     context 'for a valid csv' do
       let(:csv) {
         <<-CSV.strip_heredoc
-          email,given_name,surname
-          peter.bly@valid.gov.uk,Peter,Bly
-          jon.con@valid.gov.uk,Jon,Con
+          email,given_name,surname,profile_photo,staff_nr,secondary_phone_number
+          peter.bly@valid.gov.uk,Peter,Bly,1,000001,07700000000
+          jon.con@valid.gov.uk,Jon,Con,2,000002,07700000002
         CSV
       }
 
@@ -105,7 +114,7 @@ RSpec.describe PersonCsvImporter, type: :service do
         subject.import
       end
 
-      it 'returns number of imported  records' do
+      it 'returns number of imported records' do
         expect(subject.import).to eql 2
       end
 
@@ -125,9 +134,9 @@ RSpec.describe PersonCsvImporter, type: :service do
     context 'for an invalid csv (including duplicates)' do
       let(:csv) {
         <<-CSV.strip_heredoc
-          email,given_name,surname
-          peter.bly@valid.gov.uk,,Bly
-          jon.o.carey@valid.gov.uk,Jon,O'Carey
+          email,given_name,surname,profile_photo,staff_nr,secondary_phone_number
+          peter.bly@valid.gov.uk,,Bly,1,000001,07700000000
+          jon.o.carey@valid.gov.uk,Jon,O'Carey,2,000002,07700000002
         CSV
       }
 
@@ -145,9 +154,9 @@ RSpec.describe PersonCsvImporter, type: :service do
     context 'for a CSV exported by Estates' do
       let(:csv) {
         <<-CSV.strip_heredoc
-          First Name,Last Name,E-mail Display Name
-          Reinhold,Denesik,"Denesik, Reinhold (Reinhold.Denesik@valid.gov.uk)"
-          Lelah,Jerde,"Jerde, Lelah (Lelah.Jerde@valid.gov.uk)"
+          First Name,Last Name,E-mail Display Name,Profile Photo,Staff Nr,Phone Nr
+          Reinhold,Denesik,"Denesik, Reinhold (Reinhold.Denesik@valid.gov.uk),1,000001,07700000000"
+          Lelah,Jerde,"Jerde, Lelah (Lelah.Jerde@valid.gov.uk),2,000002,07700000002"
         CSV
       }
 
