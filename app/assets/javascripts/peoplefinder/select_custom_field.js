@@ -1,10 +1,14 @@
 $(function() {
   'use strict';
 
-  var showField = function(custom_field, hidden_field_id) {
+  var showField = function(custom_field) {
     custom_field.show();
-    var custom_field_input = custom_field.find(hidden_field_id);
-    custom_field_input.disabled = false;
+  };
+
+  var hideField = function(custom_field) {
+    custom_field.find('input').val('');
+    // custom_field.find('input').prop('disabled', true);
+    custom_field.hide();
   };
 
   var enableField = function(text_field) {
@@ -15,10 +19,12 @@ $(function() {
     option_selected = option_selected || 'Other...';
 
     $(dropdown_id).change(function(e) {
+      var custom_field = $(this).closest('.form-group').find('.select_custom_field');
       if( $(this).find("option:selected").text() == option_selected ) {
-        var custom_field = $(this).closest('.form-group').find('.select_custom_field')
         showField(custom_field);
-        enableField(custom_field.find('input[disabled=disabled]'));
+        enableField(custom_field.find('input[disabled]'));
+      } else {
+        hideField(custom_field);
       }
     });
   };
