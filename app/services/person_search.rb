@@ -5,8 +5,8 @@ class PersonSearch
       query: {
         fuzzy_like_this: {
           fields: [
-            :name, :tags, :description, :location_in_building, :building_address,
-            :city_name, :role_and_group, :community_name, :staff_nr,
+            :name, :tags, :description, :location_in_building, :building_value,
+            :city_value, :role_and_group, :community_name, :staff_nr,
           ],
           like_text: query, prefix_length: 3, ignore_tf: true
         }
