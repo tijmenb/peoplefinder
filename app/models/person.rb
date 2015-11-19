@@ -5,10 +5,7 @@ class Person < ActiveRecord::Base
   belongs_to :profile_photo
 
   belongs_to :city
-  accepts_nested_attributes_for :city, reject_if: proc { |city| city['name'].blank? }
-
   belongs_to :building
-  accepts_nested_attributes_for :building, reject_if: proc { |building| building['address'].blank? }
 
   extend FriendlyId
   friendly_id :slug_source, use: :slugged
@@ -114,10 +111,18 @@ class Person < ActiveRecord::Base
 
   include Concerns::ConcatenatedFields
   concatenated_field :name, :given_name, :surname, join_with: ' '
-  concatenated_field :location, :location_in_building, :building_address, :city_name, join_with: ', '
+  concatenated_field :location, :location_in_building, :building_value, :city_value, join_with: ', '
 
   def to_s
     name
+  end
+
+  def building_value
+    custom_building.presence || building_address
+  end
+
+  def city_value
+    custom_city.presence || city_name
   end
 
   def notify_of_change?(person_responsible)

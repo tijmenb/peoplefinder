@@ -78,8 +78,7 @@
           %p.form-hint= info_text('building_hint')
         = f.select :building_id, buildings_options(@person), {include_blank: '- select city -'}, class: 'form-control'
         .select_custom_field
-          = f.fields_for :building do |building_f|
-            = building_f.text_field :address, disabled: 'disabled', class: 'form-control'
+          = f.text_field :custom_building, disabled: 'disabled', class: 'form-control'
 
       = f.form_group :city do
         = f.label :city, class: 'form-label-bold' do
@@ -87,8 +86,7 @@
           %p.form-hint= info_text('city_hint')
         = f.select :city_id, cities_options(@person), {include_blank: '- select building -'}, class: 'form-control'
         .select_custom_field
-          = f.fields_for :city do |city_f|
-            = city_f.text_field :name, disabled: 'disabled', class: 'form-control'
+          = f.text_field :custom_city, disabled: 'disabled', class: 'form-control'
 
   .form-group
     #memberships
