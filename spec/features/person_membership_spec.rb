@@ -12,7 +12,8 @@ feature "Person maintenance" do
     javascript_log_in
 
     visit new_person_path
-    fill_in 'Surname', with: 'Taylor'
+    fill_in 'First name', with: 'Jamie'
+    fill_in 'Surname', with: 'Oliver'
     fill_in 'Main email', with: person_attributes[:email]
     fill_in 'Job title', with: 'Head Honcho'
     select_in_team_select 'Digital Justice'
