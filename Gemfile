@@ -54,6 +54,7 @@ group :development do
   gem 'mailcatcher'
   gem 'brakeman', require: false
   gem 'spring-commands-rspec'
+  gem 'web-console'
 end
 
 group :development, :development, :test do
