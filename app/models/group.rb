@@ -32,6 +32,7 @@ class Group < ActiveRecord::Base
     class_name: 'Membership'
   has_many :leaders, through: :leaderships, source: :person
   has_many :non_leaders, through: :non_leaderships, source: :person
+  belongs_to :policy
 
   validates :name, presence: true
   validates :slug, uniqueness: true
