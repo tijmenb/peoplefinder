@@ -540,6 +540,7 @@ DEPENDENCIES
   friendly_id (~> 5.0.0)
   fuubar
   govspeak
+  govuk_frontend_toolkit
   govuk_template
   haml-rails
   jbuilder (~> 2.0)

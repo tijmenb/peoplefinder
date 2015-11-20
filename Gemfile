@@ -39,6 +39,7 @@ gem 'friendly_id', '~> 5.0.0'
 
 # Gov UK Helpers
 gem 'govspeak'
+gem 'govuk_frontend_toolkit'
 gem 'govuk_template'
 gem 'moj_internal_template', '~> 0.1.7'
 
