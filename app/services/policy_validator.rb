@@ -4,6 +4,8 @@ class PolicyValidator
   end
 
   def validate(user)
+    return true if user.super_admin?
+
     # if to the current group no policy is applied
     # TODO: validate policy of the ancestors!!
     return true unless @policy
