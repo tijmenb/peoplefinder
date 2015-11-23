@@ -71,7 +71,7 @@ class Group < ActiveRecord::Base
   end
 
   def can_be_edited_by?(current_user)
-    @_can_edit ||= PolicyValidator.new(policy).validate(current_user)
+    @_can_edit ||= PolicyValidator.new(self).validate(current_user)
   end
 
 private

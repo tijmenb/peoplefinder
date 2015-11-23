@@ -6,5 +6,5 @@
     = link_to 'Edit this team', edit_group_path(@group), class: 'edit-this-team'
     = link_to 'Add new sub-team', new_group_group_path(@group), class: 'add-new-sub-team'
 
-  - if @person
+  - if @person && @person.groups.last.can_be_edited_by?(current_user)
     = link_to 'Edit this profile', edit_person_path(@person), class: 'edit-this-person'

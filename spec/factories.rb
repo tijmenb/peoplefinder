@@ -65,4 +65,11 @@ FactoryGirl.define do
     name { Faker::Address.city }
   end
 
+  factory :policy do
+    sequence :name do |n|
+      'Policy-%04d' % n
+    end
+    allowed_to {[ 'cabinetoffice.gov.uk' ]}
+  end
+
 end
