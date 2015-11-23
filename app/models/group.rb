@@ -70,6 +70,10 @@ class Group < ActiveRecord::Base
     memberships.subscribing.joins(:person).map(&:person)
   end
 
+  def can_be_edited_by?(current_user)
+    @_can_edit ||= PolicyValidator.new(policy).validate(current_user)
+  end
+
 private
 
   def name_and_sequence

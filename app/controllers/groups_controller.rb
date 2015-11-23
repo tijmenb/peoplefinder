@@ -107,6 +107,6 @@ private
   end
 
   def can_add_person_here?
-    @group && @group.ancestry_depth > 1
+    @group && (@group.ancestry_depth > 1) && (@group.can_be_edited_by?(current_user))
   end
 end
