@@ -1,0 +1,7 @@
+---
+- name: cabinet-office-only
+  allowed_to:
+    - cabinetoffice@gov.uk
+# - name: moj-only
+#   allowed_to:
+#     - moj.gov.uk
