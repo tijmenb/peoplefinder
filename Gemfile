@@ -14,6 +14,7 @@ gem 'jquery-rails'
 gem 'sass-rails', '~> 4.0.3'
 gem 'uglifier', '>= 1.3.0'
 
+gem 'clockwork'
 gem 'faker'
 gem 'netaddr'
 gem 'unf'
