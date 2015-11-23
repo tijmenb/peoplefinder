@@ -47,6 +47,7 @@ gem 'moj_internal_template', '~> 0.1.7'
 # Search
 gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
+gem 'faraday_middleware-aws-signers-v4'
 
 # Workers
 gem 'delayed_job_active_record'
