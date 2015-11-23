@@ -32,6 +32,7 @@ class Group < ActiveRecord::Base
     class_name: 'Membership'
   has_many :leaders, through: :leaderships, source: :person
   has_many :non_leaders, through: :non_leaderships, source: :person
+  belongs_to :policy
 
   validates :name, presence: true
   validates :slug, uniqueness: true
@@ -67,6 +68,10 @@ class Group < ActiveRecord::Base
 
   def subscribers
     memberships.subscribing.joins(:person).map(&:person)
+  end
+
+  def can_be_edited_by?(current_user)
+    @_can_edit ||= PolicyValidator.new(self).validate(current_user)
   end
 
 private

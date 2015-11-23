@@ -61,6 +61,11 @@
     .help-content
       To add a line space press the spacebar twice
 
+  - if super_admin?
+    .form-group
+      = f.label :policy, class: 'form-label-bold'
+      = f.collection_select :policy_id, Policy.all, :id, :name, include_blank: true, class: 'form-control'
+
   - if @group.editable_parent?
     .form-group.group-parent.editable-container
       - if params[:group_id]

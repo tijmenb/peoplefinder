@@ -184,7 +184,8 @@ CREATE TABLE groups (
     description text,
     ancestry text,
     ancestry_depth integer DEFAULT 0 NOT NULL,
-    acronym text
+    acronym text,
+    policy_id integer
 );
 
 
@@ -329,6 +330,36 @@ CREATE SEQUENCE permitted_domains_id_seq
 --
 
 ALTER SEQUENCE permitted_domains_id_seq OWNED BY permitted_domains.id;
+
+
+--
+-- Name: policies; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE policies (
+    id integer NOT NULL,
+    name character varying,
+    allowed_to character varying
+);
+
+
+--
+-- Name: policies_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE policies_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: policies_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE policies_id_seq OWNED BY policies.id;
 
 
 --
@@ -501,6 +532,13 @@ ALTER TABLE ONLY permitted_domains ALTER COLUMN id SET DEFAULT nextval('permitte
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY policies ALTER COLUMN id SET DEFAULT nextval('policies_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY profile_photos ALTER COLUMN id SET DEFAULT nextval('profile_photos_id_seq'::regclass);
 
 
@@ -583,6 +621,14 @@ ALTER TABLE ONLY permitted_domains
 
 
 --
+-- Name: policies_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY policies
+    ADD CONSTRAINT policies_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: profile_photos_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -635,6 +681,13 @@ CREATE INDEX index_groups_on_ancestry ON groups USING btree (ancestry);
 
 
 --
+-- Name: index_groups_on_policy_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_groups_on_policy_id ON groups USING btree (policy_id);
+
+
+--
 -- Name: index_groups_on_slug; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -684,6 +737,13 @@ CREATE UNIQUE INDEX index_people_on_slug ON people USING btree (slug);
 
 
 --
+-- Name: index_policies_on_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_policies_on_name ON policies USING btree (name);
+
+
+--
 -- Name: index_versions_on_item_type_and_item_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -711,6 +771,14 @@ ALTER TABLE ONLY people
 
 ALTER TABLE ONLY memberships
     ADD CONSTRAINT fk_rails_092b9b8356 FOREIGN KEY (person_id) REFERENCES people(id);
+
+
+--
+-- Name: fk_rails_63f0eff306; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY groups
+    ADD CONSTRAINT fk_rails_63f0eff306 FOREIGN KEY (policy_id) REFERENCES policies(id);
 
 
 --
@@ -800,4 +868,6 @@ INSERT INTO schema_migrations (version) VALUES ('20151111094711');
 INSERT INTO schema_migrations (version) VALUES ('20151116165003');
 
 INSERT INTO schema_migrations (version) VALUES ('20151118221935');
+
+INSERT INTO schema_migrations (version) VALUES ('20151120144619');
 
