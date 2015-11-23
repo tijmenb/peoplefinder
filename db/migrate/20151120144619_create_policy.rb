@@ -5,6 +5,7 @@ class CreatePolicy < ActiveRecord::Migration
       t.string :allowed_to
     end
 
+    add_index :policies, :name, unique: true
     add_reference :groups, :policy, index: true, foreign_key: true
   end
 end

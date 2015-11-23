@@ -737,6 +737,13 @@ CREATE UNIQUE INDEX index_people_on_slug ON people USING btree (slug);
 
 
 --
+-- Name: index_policies_on_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_policies_on_name ON policies USING btree (name);
+
+
+--
 -- Name: index_versions_on_item_type_and_item_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
