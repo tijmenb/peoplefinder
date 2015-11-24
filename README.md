@@ -140,7 +140,7 @@ bundle exec rake environment elasticsearch:import:model CLASS='Person' FORCE=y
 Or you can create the index from the console:
 
 ```
-Person.__elasticsearch__.create_index! index: Person.index_name, force: true`
+Person.__elasticsearch__.create_index! index: Person.index_name, force: true
 ```
 
 And populate it:
