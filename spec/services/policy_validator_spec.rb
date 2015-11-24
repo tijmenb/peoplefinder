@@ -16,40 +16,45 @@ RSpec.describe PolicyValidator, type: :service do
     end
 
     context 'when regular user' do
-      let(:policy) { create :policy, allowed_to: ['restrict_policy_user@cabinetoffice.gov.uk'] }
-
-      context 'doesnt belong to the policy' do
-        let(:user) { create(:person) }
-
-        it { expect(subject.validate(user)).not_to be }
-      end
-
-      context 'belongs to the policy' do
-        let(:user) { create(:person, email: 'restrict_policy_user@cabinetoffice.gov.uk') }
-
-        it { expect(subject.validate(user)).to be }
-      end
-
-      context 'when the team is a sub-team of a restricted team policy' do
-        let(:restricted_group) { create(:department, policy: policy) }
-        let(:team) { create(:group, parent: restricted_group, name: 'Corporate Services') }
-        let(:subject) { described_class.new(team) }
+      context 'when group has a policy' do
+        let(:policy) { create :policy, allowed_to: ['restrict_policy_user@cabinetoffice.gov.uk'] }
 
         context 'doesnt belong to the policy' do
           let(:user) { create(:person) }
 
-          it '#validate' do
-            expect(subject.validate(user)).not_to be
-          end
+          it { expect(subject.validate(user)).not_to be }
         end
 
         context 'belongs to the policy' do
           let(:user) { create(:person, email: 'restrict_policy_user@cabinetoffice.gov.uk') }
 
-          it '#validate' do
-            expect(subject.validate(user)).to be
+          it { expect(subject.validate(user)).to be }
+        end
+
+        context 'when the team is a sub-team of a restricted team policy' do
+          let(:restricted_group) { create(:department, policy: policy) }
+          let(:team) { create(:group, parent: restricted_group, name: 'Corporate Services') }
+          let(:subject) { described_class.new(team) }
+
+          context 'doesnt belong to the policy' do
+            let(:user) { create(:person) }
+
+            it { expect(subject.validate(user)).not_to be }
+          end
+
+          context 'belongs to the policy' do
+            let(:user) { create(:person, email: 'restrict_policy_user@cabinetoffice.gov.uk') }
+
+            it { expect(subject.validate(user)).to be }
           end
         end
+      end
+
+      context 'when group doesnt have a policy' do
+        let(:policy) { nil }
+        let(:user) { create(:person) }
+
+        it { expect(subject.validate(user)).to be }
       end
 
     end # validate
