@@ -10,10 +10,13 @@ class Membership < ActiveRecord::Base
   delegate :name, to: :person, prefix: true
   delegate :image, to: :person, prefix: true
   delegate :name, to: :group, prefix: true
+  delegate :acronym, to: :group, prefix: true
+  # delegate :description, to: :group, prefix: true
   delegate :path, to: :group
 
   include Concerns::ConcatenatedFields
   concatenated_field :to_s, :group_name, :role, join_with: ', '
+  concatenated_field :indexed_fields, :group_name, :group_acronym, :role, join_with: ', '
 
   scope :subscribing, -> { where(subscribed: true) }
 end

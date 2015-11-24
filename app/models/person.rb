@@ -94,7 +94,7 @@ class Person < ActiveRecord::Base
   end
 
   def role_and_group
-    memberships.join('; ')
+    memberships.map(&:indexed_fields).join('; ')
   end
 
   def path
