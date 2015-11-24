@@ -26,6 +26,7 @@ class PeopleController < ApplicationController
 
   # GET /people/1/edit
   def edit
+    check_policy!
     @activity = params[:activity]
     @person.memberships.build if @person.memberships.empty?
     @person.build_building  unless @person.building
@@ -35,6 +36,7 @@ class PeopleController < ApplicationController
   # POST /people
   def create
     @person = Person.new(person_create_params)
+    check_policy!
 
     if @preview
       render :new
@@ -48,6 +50,7 @@ class PeopleController < ApplicationController
 
   # PATCH/PUT /people/1
   def update
+    check_policy!
     @person.assign_attributes(person_update_params)
 
     if @preview
@@ -61,6 +64,7 @@ class PeopleController < ApplicationController
 
   # DELETE /people/1
   def destroy
+    check_policy!
     destroyer = PersonDestroyer.new(@person, current_user)
     destroyer.destroy!
     notice :profile_deleted, person: @person
@@ -145,5 +149,12 @@ private
 
   def check_and_set_preview_flag
     @preview = params[:preview].present?
+  end
+
+  def check_policy!
+    unless PolicyValidator.new(@person.groups.first).validate(current_user)
+      error :not_authorized_error
+      redirect_to :home
+    end
   end
 end

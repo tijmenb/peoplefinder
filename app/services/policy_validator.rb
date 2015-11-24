@@ -6,6 +6,7 @@ class PolicyValidator
 
   def validate(user)
     return true if user.super_admin?
+    return true unless @group
 
     validate_rules_for(@group, user) || @policies_validated.zero?
   end
