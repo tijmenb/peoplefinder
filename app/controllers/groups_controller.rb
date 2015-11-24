@@ -31,12 +31,14 @@ class GroupsController < ApplicationController
 
   # GET /groups/1/edit
   def edit
+    check_policy!
     @group.memberships.build if @group.memberships.empty?
   end
 
   # POST /groups
   def create
     @group = collection.new(group_params)
+    check_policy!
 
     if @group.save
       notice :group_created, group: @group
@@ -49,6 +51,7 @@ class GroupsController < ApplicationController
 
   # PATCH/PUT /groups/1
   def update
+    check_policy!
     group_update_service = GroupUpdateService.new(
       group: @group, person_responsible: current_user
     )
@@ -63,6 +66,7 @@ class GroupsController < ApplicationController
 
   # DELETE /groups/1
   def destroy
+    check_policy!
     next_page = @group.parent ? group_path(@group.parent) : groups_path
     @group.destroy
     notice :group_deleted, group: @group
@@ -108,5 +112,12 @@ private
 
   def can_add_person_here?
     @group && (@group.ancestry_depth > 1) && (@group.can_be_edited_by?(current_user))
+  end
+
+  def check_policy!
+    unless PolicyValidator.new(@group).validate(current_user)
+      error :not_authorized_error
+      redirect_to :home
+    end
   end
 end
