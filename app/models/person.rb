@@ -134,4 +134,8 @@ class Person < ActiveRecord::Base
 
     @_can_edit ||= PolicyValidator.new(groups.first).validate(user)
   end
+
+  def is? person
+    person && person.email == self.email
+  end
 end
