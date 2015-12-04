@@ -2,16 +2,15 @@ require 'rails_helper'
 
 RSpec.describe 'Activation' do
   include PermittedDomainHelper
-
   let(:completed_attributes) {
     {
       given_name: 'Bobby',
       surname: 'Tables',
-      email: 'user.example@digital.justice.gov.uk',
+      email: 'user.example@cabinetoffice.gov.uk',
       primary_phone_number: '020 7946 0123',
       location_in_building: '13.13',
-      building: '102 Petty France',
-      city: 'London',
+      building: Building.take,
+      city: City.where(name: 'London').first,
       description: 'I am a real person',
       profile_photo_id: profile_photo.id
     }
@@ -49,7 +48,7 @@ RSpec.describe 'Activation' do
 
     it 'returns 67 when 3 people who have logged in, two with completeness > 80%, one with completeness > 80%' do
       create(:person, completed_attributes.merge(login_count: 1))
-      create(:person, completed_attributes.merge(email: 'test2@digital.justice.gov.uk', login_count: 1))
+      create(:person, completed_attributes.merge(email: 'user.example2@cabinetoffice.gov.uk', login_count: 1))
       create(:person, login_count: 1)
       expect(Person.activated_percentage).to eq(67)
     end
