@@ -39,6 +39,8 @@ cp -f $APP_ROOT/scripts/nginx/peoplefinder.conf /etc/nginx/sites-available/peopl
 cp -f $APP_ROOT/scripts/nginx/peoplefinder-ssl.conf /etc/nginx/sites-available/peoplefinder-ssl.conf
 ln -s /etc/nginx/sites-available/peoplefinder.conf /etc/nginx/sites-enabled/peoplefinder.conf
 ln -s /etc/nginx/sites-available/peoplefinder-ssl.conf /etc/nginx/sites-enabled/peoplefinder-ssl.conf
+service nginx reload
+service nginx restart
 
 # Proceed based on instance role
 if [ $ROLE = "app" ]
