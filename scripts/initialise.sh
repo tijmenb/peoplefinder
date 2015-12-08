@@ -32,6 +32,7 @@ chmod -R 755 $APP_ROOT/tmp
 # Copy unicorn upstart, replacing if required
 cp -f $APP_ROOT/scripts/unicorn /etc/init.d/unicorn
 chmod +x /etc/init.d/unicorn
+update-rc.d unicorn defaults
 
 # Copy nginx scripts, replacing if required
 rm /etc/nginx/sites-enabled/default
