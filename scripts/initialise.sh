@@ -34,6 +34,7 @@ cp -f $APP_ROOT/scripts/unicorn /etc/init.d/unicorn
 chmod +x /etc/init.d/unicorn
 
 # Copy nginx scripts, replacing if required
+rm /etc/nginx/sites-enabled/default
 cp -f $APP_ROOT/scripts/nginx/nginx.conf /etc/nginx/nginx.conf
 cp -f $APP_ROOT/scripts/nginx/peoplefinder.conf /etc/nginx/sites-available/peoplefinder.conf
 cp -f $APP_ROOT/scripts/nginx/peoplefinder-ssl.conf /etc/nginx/sites-available/peoplefinder-ssl.conf
