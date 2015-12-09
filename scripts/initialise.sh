@@ -34,7 +34,9 @@ cp /etc/ssl/ca.crt /usr/local/share/ca-certificates
 update-ca-certificates
 
 # Generate upstart scripts and install
-foreman export upstart --app=peoplefinder --user=ubuntu /etc/init.d
+. /etc/profile.d/rvm.sh
+. /etc/profile.d/environment.sh
+foreman export upstart --app=peoplefinder --user=ubuntu /etc/init
 
 # Copy nginx scripts, replacing if required
 rm /etc/nginx/sites-enabled/default
@@ -48,20 +50,20 @@ ln -s /etc/nginx/sites-available/peoplefinder-ssl.conf /etc/nginx/sites-enabled/
 if [ $ROLE = "app" ]
 then
 	# Start peoplefinder-web and restart nginx
-	peoplefinder-web start
+	start peoplefinder-web
 	service nginx reload
 	service nginx restart
 elif [ $ROLE = "worker" ]
 then
 	# Stop nginx and the web process
 	service nginx stop
-	peoplefinder-web stop
+	stop peoplefinder-web
 	# Start the clock and worker processes
-	peoplefinder-clock start
-	peoplefinder-worker start
+	start peoplefinder-clock
+	start peoplefinder-worker
 else
-	# Automatically launch all processes at boot
-	peoplefinder start
+	# Start all processes
+	start peoplefinder
 	service nginx reload
 	service nginx restart
 fi
