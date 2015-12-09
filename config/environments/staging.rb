@@ -20,7 +20,7 @@ Rails.application.configure do
     authentication: :plain,
     user_name: ENV['SENDGRID_USERNAME'],
     password: ENV['SENDGRID_PASSWORD'],
-    domain: ENV['SENDGRID_DOMAIN'] || 'peoplefinder-staging.herokuapp.com',
+    domain: ENV['SENDGRID_DOMAIN'],
     enable_starttls_auto: true
   }
   config.action_mailer.show_previews = true

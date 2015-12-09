@@ -29,10 +29,12 @@ su - ubuntu -c "cd $APP_ROOT; bundle exec rake assets:precompile RAILS_ENV=asset
 # Assign permissions
 chmod -R 755 $APP_ROOT/tmp
 
-# Copy unicorn upstart, replacing if required
-cp -f $APP_ROOT/scripts/unicorn /etc/init.d/unicorn
-chmod +x /etc/init.d/unicorn
-update-rc.d unicorn defaults
+# Trust CO root certificate authority
+cp /etc/ssl/ca.crt /usr/local/share/ca-certificates
+update-ca-certificates
+
+# Generate upstart scripts and install
+foreman export upstart --app=peoplefinder --user=ubuntu /etc/init.d
 
 # Copy nginx scripts, replacing if required
 rm /etc/nginx/sites-enabled/default
@@ -45,14 +47,27 @@ ln -s /etc/nginx/sites-available/peoplefinder-ssl.conf /etc/nginx/sites-enabled/
 # Proceed based on instance role
 if [ $ROLE = "app" ]
 then
-	update-rc.d unicorn defaults
-	service unicorn start
+	# Automatically launch web process at boot
+	update-rc.d peoplefinder-web defaults
+	# Start peoplefinder-web and restart nginx
+	service peoplefinder-web start
 	service nginx reload
 	service nginx restart
 elif [ $ROLE = "worker" ]
 then
+	# Automatically launch worker processes at boot
+	update-rc.d peoplefinder-clock defaults
+	update-rc.d peoplefinder-worker defaults
+	# Stop nginx and the web process
 	service nginx stop
-	service unicorn stop
-	su - ubuntu -c "cd $APP_ROOT; bundle exec rake jobs:work"
-	su - ubuntu -c "cd $APP_ROOT; bundle exec clockwork config/schedule.rb"
+	service peoplefinder-web stop
+	# Start the clock and worker processes
+	service peoplefinder-clock start
+	service peoplefinder-worker start
+elif [ $ROLE = "hybrid" ]
+	# Automatically launch all processes at boot
+	update-rc.d peoplefinder defaults
+	service peoplefinder start
+	service nginx reload
+	service nginx restart
 fi
