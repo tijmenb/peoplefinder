@@ -47,27 +47,21 @@ ln -s /etc/nginx/sites-available/peoplefinder-ssl.conf /etc/nginx/sites-enabled/
 # Proceed based on instance role
 if [ $ROLE = "app" ]
 then
-	# Automatically launch web process at boot
-	update-rc.d peoplefinder-web defaults
 	# Start peoplefinder-web and restart nginx
-	service peoplefinder-web start
+	peoplefinder-web start
 	service nginx reload
 	service nginx restart
 elif [ $ROLE = "worker" ]
 then
-	# Automatically launch worker processes at boot
-	update-rc.d peoplefinder-clock defaults
-	update-rc.d peoplefinder-worker defaults
 	# Stop nginx and the web process
 	service nginx stop
-	service peoplefinder-web stop
+	peoplefinder-web stop
 	# Start the clock and worker processes
-	service peoplefinder-clock start
-	service peoplefinder-worker start
-elif [ $ROLE = "hybrid" ]
+	peoplefinder-clock start
+	peoplefinder-worker start
+else
 	# Automatically launch all processes at boot
-	update-rc.d peoplefinder defaults
-	service peoplefinder start
+	peoplefinder start
 	service nginx reload
 	service nginx restart
 fi
