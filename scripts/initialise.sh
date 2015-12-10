@@ -33,10 +33,12 @@ chmod -R 755 $APP_ROOT/tmp
 cp /etc/ssl/ca.crt /usr/local/share/ca-certificates
 update-ca-certificates
 
-# Generate upstart scripts and install
-. /etc/profile.d/rvm.sh
-. /etc/profile.d/environment.sh
-foreman export upstart --app=peoplefinder --user=ubuntu /etc/init
+# Copy upstart scripts
+cp $APP_ROOT/scripts/upstart/peoplefinder.conf /etc/init
+cp $APP_ROOT/scripts/upstart/peoplefinder-web.conf /etc/init
+cp $APP_ROOT/scripts/upstart/peoplefinder-worker.conf /etc/init
+cp $APP_ROOT/scripts/upstart/peoplefinder-clock.conf /etc/init
+initctl reload-configuration
 
 # Copy nginx scripts, replacing if required
 rm /etc/nginx/sites-enabled/default
