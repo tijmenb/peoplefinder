@@ -8,7 +8,6 @@ gem 'haml-rails'
 gem 'paper_trail', '~> 4.0.0.beta'
 gem 'virtus'
 gem 'ancestry'
-gem 'foreman'
 
 # Assets
 gem 'jquery-rails'
@@ -69,6 +68,7 @@ group :staging do
 end
 
 group :development do
+  gem 'foreman'
   gem 'mailcatcher'
   gem 'brakeman', require: false
   gem 'spring-commands-rspec'
