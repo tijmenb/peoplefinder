@@ -150,6 +150,10 @@ class Person < ActiveRecord::Base
     custom_city.presence || city_name
   end
 
+  def at_permitted_domain?
+    EmailAddress.new(email).permitted_domain?
+  end
+
   def notify_of_change?(person_responsible)
     person_responsible.try(:email) != email
   end
