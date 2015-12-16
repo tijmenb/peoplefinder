@@ -17,6 +17,8 @@ class GroupsController < ApplicationController
 
   # GET /groups/1
   def show
+    authorize @group
+
     respond_to do |format|
       format.html { session[:last_group_visited] = @group.id }
       format.js
@@ -27,18 +29,21 @@ class GroupsController < ApplicationController
   def new
     @group = collection.new
     @group.memberships.build person: person_from_person_id
+    authorize @group
   end
 
   # GET /groups/1/edit
   def edit
     check_policy!
     @group.memberships.build if @group.memberships.empty?
+    authorize @group
   end
 
   # POST /groups
   def create
     @group = collection.new(group_params)
     check_policy!
+    authorize @group
 
     if @group.save
       notice :group_created, group: @group
@@ -52,6 +57,8 @@ class GroupsController < ApplicationController
   # PATCH/PUT /groups/1
   def update
     check_policy!
+    authorize @group
+
     group_update_service = GroupUpdateService.new(
       group: @group, person_responsible: current_user
     )
@@ -67,6 +74,8 @@ class GroupsController < ApplicationController
   # DELETE /groups/1
   def destroy
     check_policy!
+    authorize @group
+
     next_page = @group.parent ? group_path(@group.parent) : groups_path
     @group.destroy
     notice :group_deleted, group: @group

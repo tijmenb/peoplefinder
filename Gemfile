@@ -19,6 +19,7 @@ gem 'faker'
 gem 'netaddr'
 gem 'unf'
 gem 'useragent', '~> 0.10.0'
+gem 'pundit'
 gem 'omniauth-gplus',
   git: 'https://github.com/ministryofjustice/omniauth-gplus.git'
 
