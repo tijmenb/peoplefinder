@@ -34,6 +34,16 @@ RSpec.describe SearchController, type: :controller do
       get :index, query: query
       expect(assigns(:query)).to eq(query)
     end
+
+    context 'when empty is query' do
+      let(:query) { nil }
+
+      it 'assigns an empty string to @query' do
+        get :index, query: query
+        expect(assigns(:query)).to eq('')
+      end
+    end
+
   end
 
   context 'with invalid UTF-8' do

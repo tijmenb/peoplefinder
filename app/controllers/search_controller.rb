@@ -11,6 +11,7 @@ private
   end
 
   def query
+    return '' unless params[:query]
     input = params[:query]
     input.encode(Encoding::UTF_32LE)
     input
