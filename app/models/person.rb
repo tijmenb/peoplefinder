@@ -151,7 +151,7 @@ class Person < ActiveRecord::Base
   end
 
   def notify_of_change?(person_responsible)
-    EmailAddress.new(email).valid_address? && person_responsible.try(:email) != email
+    person_responsible.try(:email) != email
   end
 
   def can_be_edited_by?(user)
