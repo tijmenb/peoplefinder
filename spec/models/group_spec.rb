@@ -93,7 +93,7 @@ RSpec.describe Group, type: :model do
     let(:subteam) { create(:group, parent: team) }
 
     let(:alice) { create(:person, given_name: 'alice', surname: 'smith') }
-    let(:bob) { create(:person, given_name: 'bob', surname: 'smith', city: 'Winchester') }
+    let(:bob) { create(:person, given_name: 'bob', surname: 'smith') }
 
     subject { team.all_people }
 

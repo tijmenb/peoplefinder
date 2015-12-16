@@ -297,7 +297,7 @@ feature 'Person maintenance' do
         expect { Person.find(person.id) }.to raise_error(ActiveRecord::RecordNotFound)
 
         expect(last_email.to).to include(email_address)
-        expect(last_email.subject).to eq('Your profile on MOJ People Finder has been deleted')
+        expect(last_email.subject).to eq('Your profile on People Finder has been deleted')
         expect(last_email.body.encoded).to match("Hello #{given_name}")
       end
 
@@ -339,7 +339,7 @@ feature 'Person maintenance' do
     end
 
     context 'for a regular user', user: :regular do
-      let(:another_person) { create(:person, email: 'someone.else@digital.justice.gov.uk') }
+      let(:another_person) { create(:person, email: 'someone.else@cabinetoffice.gov.uk') }
 
       scenario 'when it is complete' do
         complete_profile!(another_person)
