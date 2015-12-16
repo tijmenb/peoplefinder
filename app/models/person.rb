@@ -155,7 +155,7 @@ class Person < ActiveRecord::Base
   end
 
   def notify_of_change?(person_responsible)
-    person_responsible.try(:email) != email
+    at_permitted_domain? && person_responsible.try(:email) != email
   end
 
   def can_be_edited_by?(user)
