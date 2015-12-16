@@ -4,6 +4,9 @@ timeout Integer(ENV["WEB_TIMEOUT"] || 20)
 
 preload_app true
 
+app_dir = File.expand_path("../..", __FILE__)
+pid "#{app_dir}/tmp/unicorn.pid"
+
 before_fork do |server, worker|
   Signal.trap 'TERM' do
     puts 'Unicorn master intercepting TERM and sending myself QUIT instead'
