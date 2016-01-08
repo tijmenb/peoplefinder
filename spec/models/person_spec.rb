@@ -216,7 +216,7 @@ RSpec.describe Person, type: :model do
     end
 
     it 'is true when email valid with permitted domain' do
-      person.email = 'test@digital.justice.gov.uk'
+      person.email = 'test.user@cabinetoffice.gov.uk'
       expect(person.valid?).to be true
       expect(person.at_permitted_domain?).to be true
     end

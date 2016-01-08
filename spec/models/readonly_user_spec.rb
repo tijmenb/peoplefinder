@@ -43,7 +43,7 @@ RSpec.describe ReadonlyUser, type: :model do
 
   describe '#is?' do
     it 'returns false' do
-      person = build(:person, email: 'test.user@digital.justice.gov.uk')
+      person = build(:person, email: 'test.user@cabinetoffice.gov.uk')
       expect(subject.is?(person)).to be false
     end
   end
