@@ -17,12 +17,13 @@
 %div.root-team
   %h2.org-structure= @group.name
   %div.leaders.grid.grid-1-3
+    %div.inner-block.group-leader
     - @group.leaders.each do |leader|
       %div.profile
-        = profile_image_tag leader
-        %p
-          =link_to leader.name, leader, class: 'leader-name'
-          %span.leader-role= leader.memberships.where(group:@group).first.role
+        .image-background
+          = profile_image_tag leader
+        %h4= link_to leader, leader
+        %span.leader-role= leader.memberships.where(group:@group).first.role
 
   %h3.grid.grid-2-3.about-team-header About the team
   %div.about-the-team.formatted-text.about.text.grid.grid-2-3
