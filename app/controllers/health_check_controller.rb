@@ -1,4 +1,5 @@
 class HealthCheckController < ActionController::Base
+  force_ssl :except => :index
   def index
     Rails.logger.silence do
       report = HealthCheckService.new.report
