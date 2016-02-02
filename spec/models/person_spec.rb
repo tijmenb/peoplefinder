@@ -34,14 +34,21 @@ RSpec.describe Person, type: :model do
     let(:groups) { create_list(:group, 3) }
     let(:people) { create_list(:person, 3) }
 
-    it 'returns all people in any listed groups' do
+    it 'returns all people in any listed groups and .count_in_groups returns correct count' do
       people.zip(groups).each do |person, group|
         create :membership, person: person, group: group
       end
-      result = described_class.all_in_groups(groups.take(2))
+      group_ids = groups.take(2)
+      result = described_class.all_in_groups(group_ids)
       expect(result).to include(people[0])
       expect(result).to include(people[1])
       expect(result).not_to include(people[2])
+
+      count = described_class.count_in_groups(group_ids)
+      expect(count).to eq(2)
+
+      count = described_class.count_in_groups(group_ids, excluded_group_ids: groups.take(1))
+      expect(count).to eq(1)
     end
 
     it 'concatenates all roles alphabetically with commas' do
@@ -95,6 +102,30 @@ RSpec.describe Person, type: :model do
       expect(person.role_and_group).to match(/Digital Services, Designer/)
       expect(person.role_and_group).to match(/Estates, Cleaner/)
     end
+  end
+
+  context 'with two memberships in the same group' do
+    before do
+      person.save!
+      digital_services = create(:group, name: 'Digital Services')
+      person.memberships.create(group: digital_services, role: 'Service Assessments Lead')
+      person.memberships.create(group: digital_services, role: 'Head of Delivery')
+      person.reload
+    end
+
+    it 'allows updates to those memberships' do
+      expect(person.memberships.first.leader).to be false
+
+      membership_attributes = person.memberships.first.attributes
+      person.assign_attributes(
+        memberships_attributes: {
+          membership_attributes[:id] => membership_attributes.merge(leader: true)
+        }
+      )
+      person.save!
+      expect(person.reload.memberships.first.leader).to be true
+    end
+
   end
 
   context 'path' do
@@ -177,32 +208,56 @@ RSpec.describe Person, type: :model do
     end
   end
 
-  describe '#notify_of_change?' do
-    context 'when the email is invalid' do
-      before do
-        person.email = 'invalid'
-      end
-
-      it 'is false' do
-        expect(person.notify_of_change?(build(:person))).
-          to be_falsy
-      end
+  describe 'valid?' do
+    it 'is false when email invalid' do
+      person.email = 'bad'
+      expect(person.valid?).to be false
+      expect(person.errors.messages[:email]).to eq ["isn’t valid"]
     end
 
-    context 'when the email is valid' do
-      it 'is true if there is no reponsible person' do
-        rp = nil
-        expect(person.notify_of_change?(rp)).to be_truthy
+    it 'is true when email valid with permitted domain' do
+      person.email = 'test.user@cabinetoffice.gov.uk'
+      expect(person.valid?).to be true
+      expect(person.at_permitted_domain?).to be true
+    end
+
+    it 'is false when email does not have permitted domain' do
+      person.email = 'test@example.com'
+      expect(person.valid?).to be false
+      expect(person.at_permitted_domain?).to be false
+    end
+  end
+
+  describe '#notify_of_change?' do
+    context 'when the email is not at a permitted domain' do
+      before { allow(person).to receive(:at_permitted_domain?).and_return false }
+
+      it 'is false if there is no reponsible person' do
+        expect(person.notify_of_change?(nil)).to be false
       end
 
       it 'is false if the reponsible person is this person' do
-        rp = person
-        expect(person.notify_of_change?(rp)).to be_falsy
+        expect(person.notify_of_change?(person)).to be false
+      end
+
+      it 'is false if the reponsible person is a third party' do
+        other_person = build(:person)
+        expect(person.notify_of_change?(other_person)).to be false
+      end
+    end
+
+    context 'when the email is at a permitted domain' do
+      it 'is true if there is no reponsible person' do
+        expect(person.notify_of_change?(nil)).to be true
+      end
+
+      it 'is false if the reponsible person is this person' do
+        expect(person.notify_of_change?(person)).to be false
       end
 
       it 'is true if the reponsible person is a third party' do
-        rp = build(:person)
-        expect(person.notify_of_change?(rp)).to be_truthy
+        other_person = build(:person)
+        expect(person.notify_of_change?(other_person)).to be true
       end
     end
   end
@@ -230,4 +285,23 @@ RSpec.describe Person, type: :model do
       end
     end
   end
+
+  describe '#is?' do
+    context 'given another person' do
+      it 'returns false' do
+        other_person = create(:person, email: 'test.user@cabinetoffice.gov.uk')
+        expect(person.is?(other_person)).to be false
+      end
+    end
+
+    context 'given a person with matching email' do
+      it 'returns true' do
+        email = 'test.user@cabinetoffice.gov.uk'
+        person.email = email
+        other_person = create(:person, email: email)
+        expect(person.is?(other_person)).to be true
+      end
+    end
+  end
+
 end

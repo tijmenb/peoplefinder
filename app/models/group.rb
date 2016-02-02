@@ -62,6 +62,34 @@ class Group < ActiveRecord::Base
     Person.all_in_groups(subtree_ids)
   end
 
+  def all_people_count
+    Person.count_in_groups(subtree_ids)
+  end
+
+  def people_outside_subteams
+    Person.all_in_groups([self.id]) - Person.all_in_groups(subteam_ids)
+  end
+
+  def people_outside_subteams_count
+    Person.count_in_groups([self.id], excluded_group_ids: subteam_ids)
+  end
+
+  def leaderships_by_person
+    leaderships.group_by(&:person)
+  end
+
+  def completion_score
+    Rails.cache.fetch("#{id}-completion-score", expires_in: 1.hour) do
+      people = all_people
+      if people.blank?
+        0
+      else
+        total_score = people.inject(0) { |total, person| total + person.completion_score }
+        (total_score / people.length.to_f).round(0)
+      end
+    end
+  end
+
   def editable_parent?
     new_record? || parent.present? || children.empty?
   end
@@ -84,5 +112,9 @@ private
 
   def check_deletability
     errors.add :base, :memberships_exist unless deletable?
+  end
+
+  def subteam_ids
+    subtree_ids - [self.id]
   end
 end

@@ -1,4 +1,6 @@
 class Person < ActiveRecord::Base
+  include Concerns::Acquisition
+  include Concerns::Activation
   include Concerns::Completion
   include Concerns::WorkDays
   include Concerns::ExposeMandatoryFields
@@ -86,11 +88,34 @@ class Person < ActiveRecord::Base
       SELECT DISTINCT p.*,
         string_agg(CASE role WHEN '' THEN NULL ELSE role END, ', ' ORDER BY role) AS role_names
       FROM memberships m, people p
-      WHERE m.person_id = p.id AND group_id in (?)
+      WHERE m.person_id = p.id AND m.group_id in (?)
       GROUP BY p.id
       ORDER BY surname ASC, given_name ASC;
     SQL
     find_by_sql([query, group_ids])
+  end
+
+  def self.count_in_groups(group_ids, excluded_group_ids: [])
+    excluded_ids = if excluded_group_ids.present?
+                     Person.in_groups(excluded_group_ids).pluck(:id)
+                   else
+                     []
+                   end
+
+    Person.in_groups(group_ids).where.not(id: excluded_ids).count
+  end
+
+  private
+
+  def self.in_groups(group_ids)
+    Person.includes(:memberships).
+        where("memberships.group_id": group_ids)
+  end
+
+  public
+
+  def to_s
+    name
   end
 
   def role_and_group
@@ -125,13 +150,21 @@ class Person < ActiveRecord::Base
     custom_city.presence || city_name
   end
 
+  def at_permitted_domain?
+    EmailAddress.new(email).permitted_domain?
+  end
+
   def notify_of_change?(person_responsible)
-    EmailAddress.new(email).valid_address? && person_responsible.try(:email) != email
+    at_permitted_domain? && person_responsible.try(:email) != email
   end
 
   def can_be_edited_by?(user)
     return true if groups.empty?
 
     @_can_edit ||= PolicyValidator.new(groups.first).validate(user)
+  end
+
+  def is? person
+    person && person.email == self.email
   end
 end

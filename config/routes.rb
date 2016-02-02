@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :groups, path: 'teams' do
     resources :groups, only: [:new]
     get :people, on: :member, action: 'all_people'
+    get :"people-outside-subteams", on: :member, action: 'people_outside_subteams'
   end
 
   resources :people do
@@ -35,6 +36,7 @@ Rails.application.routes.draw do
   get '/groups/:id/people', to: redirect('/teams/%{id}/people')
 
   namespace :metrics do
+    resources :activations, only: [:index]
     resources :completions, only: [:index]
     resources :profiles, only: [:index]
   end

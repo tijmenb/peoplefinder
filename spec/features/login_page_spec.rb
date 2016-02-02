@@ -11,7 +11,7 @@ feature 'Login page' do
       visit '/'
 
       expect(login_page).to be_displayed
-      expect(login_page.description).to have_text('We will email you a secure link so you can log in to People Finder and create or edit profiles.')
+      expect(login_page.description).to have_text("If you don't have a government Google account, we can email you a secure link so you can log in to People Finder. The link will be active for 4 hours.")
     end
   end
   context 'User from inside the network' do
@@ -23,7 +23,7 @@ feature 'Login page' do
       visit '/sessions/new'
 
       expect(login_page).to be_displayed
-      expect(login_page.description).to have_text('We will email you a secure link so you can log in to People Finder and create or edit profiles.')
+      expect(login_page.description).to have_text("If you don't have a government Google account, we can email you a secure link so you can log in to People Finder. The link will be active for 4 hours.")
     end
 
     scenario 'Is presented with special login page and copy if they are forced to login to make changes' do
