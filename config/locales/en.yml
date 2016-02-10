@@ -47,6 +47,7 @@ en:
       body_informative_html: Please check your inbox for this email from <a href="mailto:peoplefinder@cabinetoffice.gov.uk">peoplefinder@cabinetoffice.gov.uk</a>.
       body_unauthorised: When it arrives, click on the link (which is active for 4 hours). This will log you in to People Finder and enable you to make any changes.
       body_dont_panic: If you can’t find it, check your junk folder and add our address to your safe list.
+      body_help_html: If you don't receive an email after 5 minutes, please <a href="mailto:peoplefinder@cabinetoffice.gov.uk">contact us</a>.
       token_auth_disabled: "Sorry, the alternate login method is not availabe. Please login using your Google account."
   controllers:
     groups:
