@@ -90,11 +90,9 @@ en:
   memberships:
     leader:
       mine: |
-        Tick this box if you lead the <span id="team-led">team above</span>.
-        (More than one person can be selected as team leader.)
+        Tick this box if you are the leader of the <span id="team-led">team above</span>.
       other: |
-        This person leads the <span id="team-led">team above</span>.
-        (More than one person can be selected as team leader.)
+        This person is the leader of the <span id="team-led">team above</span>.
     subscribed:
       mine: |
         Tick this box if you want to be alerted by email whenever anyone

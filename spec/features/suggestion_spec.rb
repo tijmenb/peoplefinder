@@ -79,7 +79,7 @@ feature 'Make a suggestion about a profile', js: true do
   end
 
   scenario 'Ask an admin to remove the profile', user: :regular do
-    check 'remove the profile as the person has left #{brand}'
+    check 'remove the profile as the person has left the Cabinet Office'
     fill_in 'Person left info', with: 'They have left to become a goatherd'
     click_button 'Submit'
 
