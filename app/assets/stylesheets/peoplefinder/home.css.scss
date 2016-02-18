@@ -4,7 +4,7 @@
     font-size: 1em;
   }
   .search-wrapper {
-    padding-bottom: 56px;
+    padding-bottom: 16px;
     border-bottom: 1px solid $grey-2;
     overflow: hidden;
   }
@@ -29,8 +29,11 @@
     border-bottom: none;
   }
 
+
+
   h1{
     margin-bottom: 0;
+    margin-top: 15px;
   }
 
   .help-peoplefinder {
@@ -46,6 +49,22 @@
       }
     }
   }
+
+  .leader-profile {
+    float:left;
+    margin-right:20px;
+    margin-bottom:10px
+  }
+
+  .leader-profile {
+    min-height: 300px;
+    max-width:217px;
+    .leader-background {
+      height: 217px;
+    }
+    @include maginot(217px, 217px);
+  }
+
 
   .root-team {
     overflow: hidden;
