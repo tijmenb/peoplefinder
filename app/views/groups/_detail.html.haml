@@ -20,4 +20,4 @@
           %div.leader-background
             = profile_image_tag leader, class: 'team-members'
           %h4= link_to leader, leader
-          %span.leader-role= leader.memberships.where(group:@group).first.role
+          %span.leader-role= leader.memberships.where(group:@group).map(&:role).select(&:present?).sort.join(', ')
