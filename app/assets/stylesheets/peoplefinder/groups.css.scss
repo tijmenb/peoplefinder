@@ -21,6 +21,26 @@ $focus-color: #FFBF47;
   }
 }
 
+.inner-block .grid-wrapper {
+  margin-left:0px;
+  margin-right:0px;
+}
+
+.leader-profile {
+  float:left;
+  margin-right:20px;
+  margin-bottom:10px
+}
+
+.leader-profile {
+  min-height: 300px;
+  max-width:217px;
+  .leader-background {
+    height: 217px;
+  }
+  @include maginot(217px, 217px);
+}
+
 .team-member {
   min-height: 300px;
   .image-background {

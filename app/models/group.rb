@@ -78,6 +78,14 @@ class Group < ActiveRecord::Base
     leaderships.group_by(&:person)
   end
 
+  def leaders_by_priority
+    if self.ancestry_depth == 0
+      Person.leaders_in_groups_by_creation_date([self.id])
+    else
+      Person.leaders_in_groups_by_surname([self.id])
+    end
+  end
+
   def completion_score
     Rails.cache.fetch("#{id}-completion-score", expires_in: 1.hour) do
       people = all_people

@@ -22,7 +22,7 @@
     = govspeak(@group.with_placeholder_default(:description))
 
   %div.leaders.grid.grid-1-1
-    - @group.leaders.each do |leader|
+    - @group.leaders_by_priority.each do |leader|
       %div.leader-profile
         = link_to leader do
           %div.leader-background
