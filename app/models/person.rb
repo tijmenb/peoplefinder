@@ -112,6 +112,16 @@ class Person < ActiveRecord::Base
         where("memberships.group_id": group_ids)
   end
 
+  def self.leaders_in_groups_by_creation_date(group_ids)
+    Person.includes(:memberships).
+        where("memberships.group_id": group_ids).where("memberships.leader": true).sort_by(&:created_at)
+  end
+
+  def self.leaders_in_groups_by_surname(group_ids)
+    Person.includes(:memberships).
+        where("memberships.group_id": group_ids).where("memberships.leader": true).sort_by(&:surname)
+  end
+
   public
 
   def to_s

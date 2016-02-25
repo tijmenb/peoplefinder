@@ -13,7 +13,7 @@ class PersonSearch
           fuzzy_like_this: {
             fields: [
               :name, :tags, :description, :location_in_building, :building_value,
-              :city_value, :role_and_group, :community_name, :staff_nr,
+              :city_value, :role_and_group, :community_name,
             ],
             like_text: text, prefix_length: 3, ignore_tf: true
           }
