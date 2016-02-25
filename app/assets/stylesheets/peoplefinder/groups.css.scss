@@ -18,11 +18,15 @@ $focus-color: #FFBF47;
     margin: 0;
     font-size: 1.6em;
     padding-top: 0;
+    padding-bottom:20px
   }
 }
 
+.inner-block .details-exploded {
+    margin-left:0px;
+}
+
 .inner-block .grid-wrapper {
-  margin-left:0px;
   margin-right:0px;
 }
 

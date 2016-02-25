@@ -34,7 +34,7 @@ feature "Person maintenance" do
     expect(membership).to be_subscribed
 
     visit group_path(group)
-    expect(page).to have_selector('.leader-profile h4', text: 'Oliver')
+    expect(page).to have_selector('h4', text: 'Oliver')
     expect(page).to have_selector('.leader-role', text: 'Head Honcho')
   end
 
@@ -91,7 +91,7 @@ feature "Person maintenance" do
     click_button 'Save', match: :first
 
     visit group_path(Group.find_by_name('Digital Justice'))
-    expect(page).to have_selector('.leader-profile h4', text: 'Samantha Taylor')
+    expect(page).to have_selector('h4', text: 'Samantha Taylor')
     expect(page).to have_selector('.leader-role', text: 'Head Honcho, Master of None')
 
     visit person_path(person)
