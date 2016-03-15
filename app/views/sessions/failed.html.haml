@@ -1,3 +1,13 @@
-%h1.visuallyhidden= @page_title = 'Login failure'
-%h2.h3.no-line You need to log in with a Cabinet Office email address
-%p= link_to 'Return to the log in screen', '/'
+- content_for :body_classes, 'failed-page'
+
+%h1.no-line Sorry, that didn't work
+
+%h2.h3.no-line We couldn't verify your details, so we couldn't log you in.
+
+%p It might be that you haven't logged in using your Cabinet Office email address, or perhaps something else isn't right.
+
+.spacer-5
+.spacer-5
+.spacer-5
+
+%p= link_to 'Go back', '/', class: 'button login-button'
