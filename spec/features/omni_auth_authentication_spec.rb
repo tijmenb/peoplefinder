@@ -30,10 +30,10 @@ feature 'OmniAuth Authentication' do
     expect(login_page).to be_displayed
 
     click_link 'Log in'
-    expect(page).to have_title("Login failure - #{ app_title }")
-    expect(page).to have_text(/log in with a Cabinet Office email address/)
+    expect(page).to have_title("#{ app_title }")
+    expect(page).to have_text(/We couldn't verify your details, so we couldn't log you in./)
 
-    click_link 'Return to the log in screen'
+    click_link 'Go back'
     expect(login_page).to be_displayed
   end
 
