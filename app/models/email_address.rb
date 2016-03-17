@@ -26,11 +26,19 @@ class EmailAddress
   end
 
   def inferred_last_name
-    capitalise(local.split('.')[(multipart_local? ? 1 : 0)])
+    if domain.end_with? "no10.x.gsi.gov.uk"
+      capitalise(local[1..-1])
+    else 
+      capitalise(local.split('.')[(multipart_local? ? 1 : 0)])
+    end
   end
 
   def inferred_first_name
-    capitalise(local.split('.')[0]) if multipart_local?
+    if domain.end_with? "no10.x.gsi.gov.uk"
+      capitalise(local[0])
+    else 
+      capitalise(local.split('.')[0]) if multipart_local?
+    end
   end
 
   def multipart_local?
