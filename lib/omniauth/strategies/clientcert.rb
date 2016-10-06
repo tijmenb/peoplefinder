@@ -24,6 +24,9 @@ module OmniAuth
           return fail!(:invalid_credentials, OmniAuth::Error.new('Invalid client certificate supplied by user'))
         end
 
+        puts request.env["HTTP_SSL_CLIENT_DN"]
+        puts request.env["HTTP_SSL_CLIENT_SERIAL"]
+
         name = OpenSSL::X509::Name.parse request.env["HTTP_SSL_CLIENT_DN"]
         @info = {
           name: name,
